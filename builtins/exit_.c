@@ -6,14 +6,14 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:19:06 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/04 16:21:53 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/04 18:39:56 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-void	ft_exit(void)
+void	exit_(void)
 {
 	printf("exit\n");
 	exit(0);
