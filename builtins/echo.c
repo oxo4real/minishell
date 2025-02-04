@@ -6,26 +6,26 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/04 15:08:54 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/04 17:44:02 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	ft_strcmp(const char *s1, const char *s2);
+static int	is_flag(const char *s);
 
 void	echo(char **av)
 {
-	int	newline = 1;
-	int	start = 1;
+	int	newline;
 	int	i;
 	
-	if (av[1] && ft_strcmp(av[1], "-n") == 0)
+	newline = 1;
+	i = 1;
+	while (av[i] && is_flag(av[i]))
 	{
 		newline = 0;
-		start = 2;
+		i++;
 	}
-	i = start;
 	while (av[i])
 	{
 		printf("%s", av[i]);
@@ -35,4 +35,18 @@ void	echo(char **av)
 	}
 	if (newline)
 		printf("\n");
+}
+
+static int	is_flag(const char *s)
+{
+	if (*s != '-')
+		return (0);
+	s++;
+	while (*s && *s != ' ')
+	{
+		if (*s != 'n')
+			return (0);
+		s++;
+	}
+	return (1);
 }
