@@ -6,18 +6,19 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:19:06 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 09:43:15 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/05 10:55:19 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 int		ft_atoi(char *str);
 void	print_error2(char *shell_name, char *command,
 		char *details, char *description);
 int		ft_islong(char *s);
+void	ft_putstr_fd(char const *s, int fd);
 
 static int	count_args(char **av);
 static int	is_valid(char *s);
@@ -25,7 +26,7 @@ static int	is_valid(char *s);
 void	exit_(char **av, bool print)
 {
 	if (print)
-		printf("exit\n");
+		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (count_args(av) == 1)
 		exit(0);
 	else if (!is_valid(av[1]))
