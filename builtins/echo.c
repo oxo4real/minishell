@@ -6,20 +6,25 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 16:00:27 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/05 16:23:24 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static int	is_flag(const char *s);
+void		print_error(char *shell_name, char *command, char *details);
 
 void	echo(char **av)
 {
 	int	newline;
 	int	i;
 	
+	if (write(1, NULL, 0) < 0)
+		return (print_error("minishell", "echo", "write error"),
+			exit(EXIT_FAILURE));
 	newline = 1;
 	i = 1;
 	while (av[i] && is_flag(av[i]))
@@ -29,7 +34,7 @@ void	echo(char **av)
 	}
 	while (av[i])
 	{
-		printf("%s", av[i]);
+		print_error("minishell", "echo", "write error");
 		if (av[i + 1])
 			printf(" ");
 		i++;
