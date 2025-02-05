@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   free2darr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 13:28:38 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 15:05:05 by aaghzal          ###   ########.fr       */
+/*   Created: 2025/02/05 14:42:43 by aaghzal           #+#    #+#             */
+/*   Updated: 2025/02/05 15:03:53 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+#include <stdlib.h>
+
+void	freestrarr(char ***arr)
 {
-	int	neg;
-	int	num;
 	int	i;
 
 	i = 0;
-	neg = 1;
-	num = 0;
-	while (str[i] <= ' ')
-		i++;
-	while (str[i] == '-' || str[i] == '+')
+	if (!arr || !(*arr))
+		return ;
+	while ((*arr)[i])
 	{
-		if (str[i] == '-')
-		{
-			neg *= -1;
-		}
+		free((*arr)[i]);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + (str[i] - 48);
-		i++;
-	}
-	return (num * neg);
+	free((*arr));
+	(*arr) = NULL;
 }
