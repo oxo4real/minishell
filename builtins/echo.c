@@ -6,11 +6,12 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/04 17:44:02 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/05 16:00:27 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 static int	is_flag(const char *s);
 
@@ -35,6 +36,7 @@ void	echo(char **av)
 	}
 	if (newline)
 		printf("\n");
+	exit(EXIT_SUCCESS);
 }
 
 static int	is_flag(const char *s)
