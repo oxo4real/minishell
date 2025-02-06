@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:04:21 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:25:15 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:45:50 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	unset(char **av, t_env **env_lst)
 
 	if (!env_lst)
 		return ;
-	i = 1;
-	while (av[i])
+	i = 0;
+	while (av[++i])
 	{
 		var = (*env_lst);
 		while (var && ft_strcmp(var->key, av[i]) != 0)
@@ -48,7 +48,6 @@ void	unset(char **av, t_env **env_lst)
 				head->next = var->next;
 			freenode(&var);
 		}
-		i++;
 	}
 }
 
