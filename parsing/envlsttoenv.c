@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:45:47 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 14:59:46 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:27:47 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 typedef struct s_env
 {
-	char *key;
-	char *value;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 int		envlstlen(t_env *env_lst);
@@ -51,7 +51,7 @@ int	envlstlen(t_env *env_lst)
 	int	rendu;
 
 	rendu = 0;
-	while(env_lst)
+	while (env_lst)
 	{
 		rendu++;
 		env_lst = env_lst->next;
