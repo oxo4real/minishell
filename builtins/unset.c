@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:04:21 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:02:01 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:25:15 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 typedef struct s_env
 {
-	char *key;
-	char *value;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
-int	ft_strcmp(const char *s1, const char *s2);
+int			ft_strcmp(const char *s1, const char *s2);
 
-static void freenode(t_env **node);
+static void	freenode(t_env **node);
 
 void	unset(char **av, t_env **env_lst)
 {
@@ -52,7 +52,7 @@ void	unset(char **av, t_env **env_lst)
 	}
 }
 
-static void freenode(t_env **node)
+static void	freenode(t_env **node)
 {
 	if (!node || !(*node))
 		return ;

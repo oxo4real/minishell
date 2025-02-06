@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:52:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 16:39:48 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:23:19 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct s_env
 {
-	char *key;
-	char *value;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 char	**envlsttoenv(t_env *env_lst);

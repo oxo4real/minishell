@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:19:06 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 10:55:19 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:24:27 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <stdbool.h>
 #include <unistd.h>
 
-int		ft_atoi(char *str);
-void	print_error2(char *shell_name, char *command,
-		char *details, char *description);
-int		ft_islong(char *s);
-void	ft_putstr_fd(char const *s, int fd);
+int			ft_atoi(char *str);
+void		print_error2(char *shell_name, char *command,
+				char *details, char *description);
+int			ft_islong(char *s);
+void		ft_putstr_fd(char const *s, int fd);
 
 static int	count_args(char **av);
 static int	is_valid(char *s);
@@ -44,14 +44,14 @@ static int	count_args(char **av)
 	int	count;
 
 	count = 0;
-	while(av[count])
+	while (av[count])
 		count++;
 	return (count);
 }
 
 static int	is_valid(char *s)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (!s)
 		return (0);
