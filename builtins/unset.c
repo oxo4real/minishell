@@ -6,9 +6,11 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:04:21 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 09:29:30 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:02:01 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 typedef struct s_env
 {
@@ -19,24 +21,43 @@ typedef struct s_env
 
 int	ft_strcmp(const char *s1, const char *s2);
 
+static void freenode(t_env **node);
+
 void	unset(char **av, t_env **env_lst)
 {
 	t_env	*var;
 	t_env	*head;
+	int		i;
 
-	if (!av[1] || !env_lst)
+	if (!env_lst)
 		return ;
-	var = (*env_lst);
-	while (var && ft_strcmp(var->key, av[1]) != 0)
-		var = var->next;
-	if (var)
+	i = 1;
+	while (av[i])
 	{
-		head = (*env_lst);
-		while (head != var && head->next != var)
-			head = head->next;
-		if (head == var)
-			(*env_lst) = var->next;
-		else
-			head->next = var->next;
+		var = (*env_lst);
+		while (var && ft_strcmp(var->key, av[i]) != 0)
+			var = var->next;
+		if (var)
+		{
+			head = (*env_lst);
+			while (head != var && head->next != var)
+				head = head->next;
+			if (head == var)
+				(*env_lst) = var->next;
+			else
+				head->next = var->next;
+			freenode(&var);
+		}
+		i++;
 	}
+}
+
+static void freenode(t_env **node)
+{
+	if (!node || !(*node))
+		return ;
+	free((*node)->key);
+	free((*node)->value);
+	free(*node);
+	(*node) = NULL;
 }
