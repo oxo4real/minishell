@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:22:41 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:53:07 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	echo(char **av)
 	int	newline;
 	int	i;
 
+	if (!av)
+		return ;
 	if (write(1, NULL, 0) < 0)
 		return (print_error("minishell", "echo", "write error"),
 			exit(EXIT_FAILURE));
