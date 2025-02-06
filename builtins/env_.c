@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:52:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:23:19 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:52:20 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	env_(t_env *env_lst)
 	int		i;
 	char	**env;
 
+	if (!env_lst)
+		return ;
 	env = envlsttoenv(env_lst);
 	if (!env)
 		exit(EXIT_FAILURE);
