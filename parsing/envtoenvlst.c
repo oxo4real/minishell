@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:38:54 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 13:49:01 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 09:48:51 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static int	expandenvlst(t_env **env_lst, char	**splited)
 	t_env	*new;
 	t_env	*head;
 
-	if (!env_lst)
+	if (!env_lst || !splited)
 		return (0);
 	new = malloc(sizeof(t_env));
 	if (!new)
