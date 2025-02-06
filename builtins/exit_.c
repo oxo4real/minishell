@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:19:06 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:24:27 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:51:01 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	is_valid(char *s);
 
 void	exit_(char **av, bool print)
 {
+	if (!av)
+		return ;
 	if (print)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (count_args(av) == 1)
