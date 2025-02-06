@@ -6,11 +6,12 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:04:21 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 13:16:02 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:56:13 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct s_env
 {
@@ -20,8 +21,13 @@ typedef struct s_env
 }	t_env;
 
 int			ft_strcmp(const char *s1, const char *s2);
+int			ft_isdigit(int c);
+int			ft_isalnum(int c);
+void		print_error3(char *shell_name, char *command,
+			char *details, char *description);
 
 static void	freenode(t_env **node);
+static bool	valid_identifier(char *s);
 
 void	unset(char **av, t_env **env_lst)
 {
@@ -37,7 +43,7 @@ void	unset(char **av, t_env **env_lst)
 		var = (*env_lst);
 		while (var && ft_strcmp(var->key, av[i]) != 0)
 			var = var->next;
-		if (var)
+		if (var && valid_identifier(av[i]))
 		{
 			head = (*env_lst);
 			while (head != var && head->next != var)
@@ -59,4 +65,22 @@ static void	freenode(t_env **node)
 	free((*node)->value);
 	free(*node);
 	(*node) = NULL;
+}
+
+static bool	valid_identifier(char *s)
+{
+	char	*str;
+
+	str = s;
+	if (!s || ft_isdigit(*s))
+		return (print_error3("minishell", "export", str, 
+		"not a valid indentifier"), false);
+	while ((*s))
+	{
+		if (!ft_isalnum(*s) || (*s) == '_')
+			return (print_error3("minishell", "export", str, 
+			"not a valid indentifier"), false);
+		s++;
+	}
+	return (true);
 }
