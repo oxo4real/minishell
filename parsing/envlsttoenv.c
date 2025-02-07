@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:45:47 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/07 12:35:41 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/07 16:04:59 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	**envlsttoenv(t_env *env_lst)
 	int		len;
 	char	**rendu;
 
+	if (!env_lst)
+		return (NULL);
 	len = envlstlen(env_lst);
 	rendu = malloc(sizeof(char *) * (len + 1));
 	if (!rendu)
