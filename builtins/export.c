@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 13:22:37 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 16:55:40 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/07 13:28:48 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strjoin(char const *s1, char const *s2, char const *sep);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
+void		pexport(t_env *env_lst);
 void		print_error3(char *shell_name, char *command,
 			char *details, char *description);
 
 static void	replace(t_env *var, char ***splited);
 static void	append(t_env *var, char ***splited);
-static void	addtolst(t_env **env_lst, char ***splited);
+static void	addtolst(t_env **env_lst, char ***splited, char *has_value);
 static bool	valid_identifier(char *s);
 
 void	export(char **av, t_env **env_lst)
@@ -42,12 +43,12 @@ void	export(char **av, t_env **env_lst)
 	char	**splited;
 	int		i;
 
-	if (!env_lst || !av)
-		return ;
+	if (!av[1])
+		return (pexport(*env_lst));
 	i = 0;
 	while (av[++i])
 	{
-		if (!valid_identifier(av[i]) || !ft_strchr(av[i], '='))
+		if (!valid_identifier(av[i]))
 			continue ;
 		splited = split_var(av[i]);
 		if (!splited)
@@ -56,7 +57,7 @@ void	export(char **av, t_env **env_lst)
 		while (var && ft_strcmp(var->key, splited[0]) != 0)
 			var = var->next;
 		if (!var)
-			addtolst(env_lst, &splited);
+			addtolst(env_lst, &splited, ft_strchr(av[i], '='));
 		else if (*(ft_strchr(av[i], '=') - 1) == '+')
 			append(var, &splited);
 		else
@@ -73,8 +74,13 @@ static void	replace(t_env *var, char ***splited)
 	(*splited) = NULL;
 }
 
-static void	addtolst(t_env **env_lst, char ***splited)
+static void	addtolst(t_env **env_lst, char ***splited, char *has_value)
 {
+	if (!has_value)
+	{
+		free((*splited)[1]);
+		(*splited)[1] = NULL;
+	}
 	expandenvlst(env_lst, (*splited));
 	free(*splited);
 	(*splited) = NULL;
