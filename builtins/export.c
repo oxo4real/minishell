@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 13:22:37 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/07 13:28:48 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/07 13:30:48 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			ft_isdigit(int c);
 int			ft_isalnum(int c);
 void		pexport(t_env *env_lst);
 void		print_error3(char *shell_name, char *command,
-			char *details, char *description);
+				char *details, char *description);
 
 static void	replace(t_env *var, char ***splited);
 static void	append(t_env *var, char ***splited);
@@ -93,17 +93,17 @@ static bool	valid_identifier(char *s)
 	str = s;
 	if (!s || (*s) == '+' || (*s) == '=' || ft_isdigit(*s))
 		return (print_error3("minishell", "export", str, 
-		"not a valid indentifier"), false);
+				"not a valid indentifier"), false);
 	while ((*s) && (*s) != '+' && (*s) != '=')
 	{
 		if (!ft_isalnum(*s) && (*s) != '_')
 			return (print_error3("minishell", "export", str, 
-			"not a valid indentifier"), false);
+					"not a valid indentifier"), false);
 		s++;
 	}
 	if ((*s) == '+' && (*(s + 1)) != '=')
 		return (print_error3("minishell", "export", str, 
-		"not a valid indentifier"), false);
+				"not a valid indentifier"), false);
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:04:21 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 16:56:13 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/07 13:30:42 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
 void		print_error3(char *shell_name, char *command,
-			char *details, char *description);
+				char *details, char *description);
 
 static void	freenode(t_env **node);
 static bool	valid_identifier(char *s);
@@ -74,12 +74,12 @@ static bool	valid_identifier(char *s)
 	str = s;
 	if (!s || ft_isdigit(*s))
 		return (print_error3("minishell", "export", str, 
-		"not a valid indentifier"), false);
+				"not a valid indentifier"), false);
 	while ((*s))
 	{
 		if (!ft_isalnum(*s) || (*s) == '_')
 			return (print_error3("minishell", "export", str, 
-			"not a valid indentifier"), false);
+					"not a valid indentifier"), false);
 		s++;
 	}
 	return (true);
