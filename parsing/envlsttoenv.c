@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:45:47 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:27:47 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/07 12:35:41 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ char	**envlsttoenv(t_env *env_lst)
 	i = 0;
 	while (i < len)
 	{
-		rendu[i] = ft_strjoin(env_lst->key, env_lst->value, "=");
-		if (!rendu[i])
-			return (freestrarr(&rendu), NULL);
+		if (env_lst->value)
+		{
+			rendu[i] = ft_strjoin(env_lst->key, env_lst->value, "=");
+			if (!rendu[i])
+				return (freestrarr(&rendu), NULL);
+			i++;
+		}
 		env_lst = env_lst->next;
-		i++;
 	}
 	rendu[i] = NULL;
 	return (rendu);
@@ -53,7 +56,8 @@ int	envlstlen(t_env *env_lst)
 	rendu = 0;
 	while (env_lst)
 	{
-		rendu++;
+		if (env_lst->value)
+			rendu++;
 		env_lst = env_lst->next;
 	}
 	return (rendu);
