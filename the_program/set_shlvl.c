@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:31:48 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/08 16:12:04 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/08 16:39:33 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-// if (!SHLVL || !isvalid(SHLVL) || SHLVL > 999) then SHLVL=1
-//                          ^ this produces a warning when opening the shell
-// if (SHLVL == 999) then SHLVL=""
-// if (0 <= SHLVL <= 998) then SHLVL=SHLVL+1
-// if (SHLVL < 0) then SHLVL=0
-// DON'T PROTECT OVERFLOW!!
-
 int			ft_strcmp(const char *s1, const char *s2);
 int			ft_isdigit(int c);
 int			ft_atoi(char *str);
@@ -39,7 +32,7 @@ void		ft_putnbr_fd(int n, int fd);
 
 static int	isvalid(t_env *shlvl);
 static int	set_av1(char **av, t_env *shlvl);
-static void	warning_case(int shelvl_value, char **av);
+static void	the_one_case(int shelvl_value, char **av);
 
 void	set_shlvl(t_env **env_lst)
 {
@@ -61,15 +54,15 @@ static int	set_av1(char **av, t_env *shlvl)
 	int		shelvl_value;
 	char	*tmp;
 
-	if (!isvalid(shlvl) || ft_atoi(shlvl->value) < 0)
-		av[1] = ft_strdup("SHLVL=0");
+	if (!isvalid(shlvl) || ft_atoi(shlvl->value) > 999)
+		the_one_case(ft_atoi(shlvl->value), av);
 	else
 	{
 		shelvl_value = ft_atoi(shlvl->value);
 		if (shelvl_value == 999)
 			av[1] = ft_strdup("SHLVL=");
-		else if (shelvl_value > 999)
-			warning_case(shelvl_value, av);
+		else if (shelvl_value < 0)
+			av[1] = ft_strdup("SHLVL=0");
 		else
 		{
 			tmp = ft_itoa(shelvl_value + 1);
@@ -106,10 +99,13 @@ static int	isvalid(t_env *shlvl)
 	return (1);
 }
 
-static void	warning_case(int shelvl_value, char **av)
+static void	the_one_case(int shelvl_value, char **av)
 {
 	av[1] = ft_strdup("SHLVL=1");
-	ft_putstr_fd("minishell: warning: shell level (", STDERR_FILENO);
-	ft_putnbr_fd(shelvl_value + 1, STDERR_FILENO);
-	ft_putstr_fd(") too high, resetting to 1\n", STDERR_FILENO);
+	if (shelvl_value > 999)
+	{
+		ft_putstr_fd("minishell: warning: shell level (", STDERR_FILENO);
+		ft_putnbr_fd(shelvl_value + 1, STDERR_FILENO);
+		ft_putstr_fd(") too high, resetting to 1\n", STDERR_FILENO);
+	}
 }
