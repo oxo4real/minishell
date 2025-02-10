@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 10:07:51 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 15:23:22 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/10 13:11:08 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	**alloc_rendu(char *var)
 	if (!rendu)
 		return (NULL);
 	count = 0;
-	while (var[count] &&  var[count] != '+' && var[count] != '=')
+	while (var[count] && var[count] != '+' && var[count] != '=')
 		count++;
 	rendu[0] = malloc(sizeof(char) * (count + 1));
 	if (!rendu[0])
