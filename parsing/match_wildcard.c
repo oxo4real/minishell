@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:53:01 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/16 18:48:40 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/16 19:05:53 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static int	the_damn_qotes(char **p, char **s)
 	pcp++;
 	while (*pcp != delim)
 	{
-		
 		if (*(pcp++) != *(scp++))
 			return (0);
 		increment++;
