@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:53:01 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/16 19:05:53 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/18 16:19:23 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	match_wildcard(char *s, char *p)
 	char	*tmp;
 
 	last_star = NULL;
-	while (*s)
+	while ((*s) && (*s) != '\x07')
 	{
 		if (*p == '*')
 		{
