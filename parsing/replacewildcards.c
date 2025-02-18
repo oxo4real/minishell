@@ -16,7 +16,8 @@ size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2, char const *sep);
 
 static void	replacewildcard(char **str, char *tmp, int *i);
-static void	removemainqotes(char **str);
+static void	removemainqotes(char *str);
+static void	replace(char *str, int *j);
 
 void	replacewildcards(char **str)
 {
@@ -42,8 +43,7 @@ static void	replacewildcard(char **str, char *tmp, int *i)
 	//sep = getsortedwildcard(&wildcard[*i + 1]); // TODO: code this function make it return null if there is no * outside quotes
 	sep = "hello";
 	if (!sep)
-		//return (removemainqotes()); // TODO: code this function
-		return ;
+		return (removemainqotes(&(*str)[(*i) + 1]));
 	if ((*i) > 0)
 		(*str)[*i] = '\0';
 	else
@@ -52,4 +52,43 @@ static void	replacewildcard(char **str, char *tmp, int *i)
 	//free(sep);
 	free(*str);
 	(*str) = rendu;
+}
+
+void removemainqotes(char *str)
+{
+	int	j;
+
+	if (!str)
+		return ;
+	j = 0;
+	replace(str, &j);
+	while (str[j] && str[j] != '\x07')
+		str[j++] = '\x07';
+}
+
+static void	replace(char *str, int *j)
+{
+	int	i;
+	int	in_sq;
+	int	in_dq;
+	
+	i = 0;
+	in_dq = 0;
+	in_sq = 0;
+	while (str[i] && str[i] != '\x07') 
+	{
+		if (str[i] != '\'' && str[i] != '"'
+			|| str[i] == '\'' && in_dq
+			|| str[i] == '"' && in_sq)
+			str[(*j)++] = str[i];
+		if (str[i] == '\'' && !in_sq && !in_dq)
+			in_sq = 1;
+		else if (str[i] == '\'' && in_sq)
+			in_sq = 0;
+		if (str[i] == '"' && !in_dq && !in_sq)
+			in_dq = 1;
+		else if (str[i] == '"' && in_dq)
+			in_dq = 0;
+		i++;
+	}
 }
