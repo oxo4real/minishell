@@ -49,9 +49,9 @@ static void	replacewildcard(char **str, char *tmp, int *i)
 	else
 	 	(*str)[0] = '\0';
 	rendu = ft_strjoin((*str), tmp + 1, sep);
+	//free(sep);
 	if (!rendu)
 		return (removemainqotes(&(*str)[(*i) + 1]));
-	//free(sep);
 	free(*str);
 	(*str) = rendu;
 }
