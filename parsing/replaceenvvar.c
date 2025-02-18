@@ -89,6 +89,8 @@ static void	replace(char **str, char *dollar, t_env *env_lst)
 		rendu = ft_strjoin((*str), &dollar[i], sep);
 		free(sep);
 	}
+	if (!rendu)
+		return ;
 	free(*str);
 	(*str) = rendu;
 }
