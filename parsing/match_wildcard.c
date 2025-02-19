@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:53:01 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/18 16:19:23 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/19 12:04:54 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	match_wildcard(char *s, char *p)
 
 static int	checkallstars(const char *p)
 {
-	while (*p)
+	while (*p && *p != '\x07')
 	{
 		if (*p != '*')
 			return (0);
