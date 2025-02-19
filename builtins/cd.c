@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:10:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/07 20:14:12 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/19 13:01:10 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	export(char **av, t_env **env_lst);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2, char const *sep);
 void	print_error2(char *shell_name, char *command,
-		char *details, char *description);
+			char *details, char *description);
 
 int		gohome(t_env **env_lst);
 void	set_env(t_env **env_lst);
@@ -44,7 +44,7 @@ void	cd(char **av, t_env **env_lst)
 	set_env(env_lst);
 }
 
-int		gohome(t_env **env_lst)
+int	gohome(t_env **env_lst)
 {
 	t_env	*home;
 
