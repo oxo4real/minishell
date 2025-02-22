@@ -6,11 +6,11 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:06:52 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 12:32:34 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parsing.h"
 
 t_token	next_token(char *s)
 {

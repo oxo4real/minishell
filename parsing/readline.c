@@ -6,13 +6,15 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 21:50:53 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 17:38:33 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/22 21:12:05 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "executing.h"
 #include <readline/history.h>
 #include <readline/readline.h>
+
+t_gb	g_gb;
 
 void	print_unexpected(char *msg)
 {
@@ -24,32 +26,50 @@ void	print_syntax_error(char *msg)
 	printf("%s: %s: %s\n", SH_NAME, SYNTAX_ERR, msg);
 }
 
-// void	leaks(void)
-// {
-// 	system("leaks -q a.out");
-// }
+void	ll(void)
+{
+	system("leaks -q minishell");
+}
 
-int	main(void)
+char	*get_line(void)
+{
+	int		fd;
+	char	*prompt;
+	char	*line;
+
+	prompt = "";
+	if (isatty(STDIN_FILENO))
+		prompt = BOLD_RED SH_NAME " > " RESET;
+	fd = dup(1);
+	dup2(2, 1);
+	line = readline(prompt);
+	dup2(fd, 1);
+	return (line);
+}
+
+int	main(int ac, char *av[], char *env[])
 {
 	char	*line;
-	int		fd;
+	t_env	*env_lst;
 
-	// atexit(leaks);
+	g_gb.ex_code = 0;
+	((void)ac, (void)av);
+	env_lst = envtoenvlst(env);
 	while (1337)
 	{
-		fd = dup(1);
-		dup2(2, 1);
-		line = readline(BOLD_RED SH_NAME " > " RESET);
-		dup2(fd, 1);
+		line = get_line();
 		if (!line)
 		{
 			rl_clear_history();
-			printf("exit\n");
+			if (isatty(STDIN_FILENO))
+				printf("exit\n");
 			break ;
 		}
 		if (*line)
 			add_history(line);
-		parser(line);
+		executor(parser(line), env_lst);
 	}
+	envlstclear(&env_lst);
+	ll();
 	return (0);
 }

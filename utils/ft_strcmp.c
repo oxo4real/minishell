@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:55:57 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/04 14:00:07 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:44:54 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "utils.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

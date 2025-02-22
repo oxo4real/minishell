@@ -6,11 +6,11 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:41:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 13:05:45 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parsing.h"
 
 t_node	*nodenew(t_token type, char *cmd)
 {
@@ -21,6 +21,8 @@ t_node	*nodenew(t_token type, char *cmd)
 		return (NULL);
 	new->type = type;
 	new->cmd = cmd;
+	new->fd[WR_END] = WR_END;
+	new->fd[RD_END] = RD_END;
 	return (new);
 }
 

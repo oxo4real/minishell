@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:09:36 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:24:47 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:57:22 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-void	print_error(char *shell_name, char *command, char *details);
+#include "builtins.h"
 
 void	pwd(void)
 {

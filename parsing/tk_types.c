@@ -6,11 +6,11 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:56:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 13:50:30 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parsing.h"
 
 bool	is_cmd(char *s)
 {

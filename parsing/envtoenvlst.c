@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envtoenvlst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:38:54 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/07 16:04:14 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-char	**split_var(char *var);
-void	envlstclear(t_env **env_lst);
-int		expandenvlst(t_env **env_lst, char	**splited);
+#include "parsing.h"
 
 t_env	*envtoenvlst(char **env)
 {

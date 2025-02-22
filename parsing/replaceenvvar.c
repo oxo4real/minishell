@@ -3,32 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   replaceenvvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/19 12:53:56 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:30:30 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-size_t		ft_strlen(const char *s);
-int			ft_isdigit(int c);
-int			ft_isalnum(int c);
-char		*ft_strjoin(char const *s1, char const *s2, char const *sep);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-char		*ft_strdup(const char *s);
+#include "parsing.h"
 
 static void	skipquote(int *i, char *str);
 static void	replace(char **str, char *dollar, t_env *env_lst);
-static char	*findenvvar(char *dollar, int i, t_env *env_lst);
+static char	*findenvvar(char *dollar, size_t i, t_env *env_lst);
 
 void	replaceenvar(t_env *env_lst, char **str)
 {
@@ -66,7 +52,7 @@ static void	skipquote(int *i, char *str)
 
 static void	replace(char **str, char *dollar, t_env *env_lst)
 {
-	int		i;
+	size_t	i;
 	char	*rendu;
 	char	*sep;
 
@@ -93,12 +79,12 @@ static void	replace(char **str, char *dollar, t_env *env_lst)
 	(*str) = rendu;
 }
 
-static char	*findenvvar(char *dollar, int i, t_env *env_lst)
+static char	*findenvvar(char *dollar, size_t i, t_env *env_lst)
 {
 	while (env_lst)
 	{
-		if (ft_strlen(env_lst->key) == i
-			&& ft_strncmp(env_lst->key, dollar, i) == 0)
+		if (ft_strlen(env_lst->key) == i && ft_strncmp(env_lst->key, dollar,
+				i) == 0)
 			return (ft_strdup(env_lst->value));
 		env_lst = env_lst->next;
 	}

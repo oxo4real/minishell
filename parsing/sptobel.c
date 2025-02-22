@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sptobel.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:46:07 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/18 16:30:19 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "parsing.h"
 
 static void	skipquote(int *i, char *str);
 

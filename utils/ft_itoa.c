@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 09:23:20 by marvin            #+#    #+#             */
-/*   Updated: 2024/08/09 09:23:20 by marvin           ###   ########.fr       */
+/*   Created: 2025/02/22 18:39:46 by mhayyoun          #+#    #+#             */
+/*   Updated: 2025/02/22 18:39:47 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "utils.h"
 
 static void	ft_putnbr_buff(int n, char *buff, int size, int pos)
 {
 	char			c;
 	unsigned int	nb;
 
-	nb = (unsigned int) n;
+	nb = (unsigned int)n;
 	if (n < 0)
 	{
 		buff[0] = '-';

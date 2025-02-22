@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 21:36:16 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/10 11:05:03 by mhayyoun         ###   ########.fr       */
+/*   Created: 2025/02/22 20:52:44 by mhayyoun          #+#    #+#             */
+/*   Updated: 2025/02/22 21:12:05 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "executing.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	executor(t_node *head, t_env *env_lst)
 {
-	size_t	i;
+	char	**env;
 
-	if (dst == src || n == 0)
-		return (dst);
-	i = 0;
-	while (i < n)
-	{
-		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-		i++;
-	}
-	return (dst);
+	if (!head)
+		return ;
+	env = envlsttoenv(env_lst);
+	do_here_doc(head, env_lst);
+	expand_cmds(head, env_lst);
+	exec_(head, env);
+	free_tree(head);
+	freestrarr(&env);
+	g_gb.ex_code = 0;
 }

@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 21:43:09 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/17 20:57:20 by mhayyoun         ###   ########.fr       */
+/*   Created: 2024/07/23 21:36:16 by mhayyoun          #+#    #+#             */
+/*   Updated: 2025/02/22 19:53:58 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "utils.h"
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*ptr;
+	size_t	i;
 
-	ptr = s;
-	while (n--)
-		*ptr++ = 0;
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*aloc;
-
-	size *= count;
-	aloc = malloc(size);
-	if (aloc)
-		ft_bzero(aloc, size);
-	return (aloc);
+	if (dst == src || n == 0)
+		return (dst);
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dst);
 }

@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   print_error2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:54:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 15:25:43 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:52:04 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "utils.h"
 
-void	ft_putstr_fd(char const *s, int fd);
-
-void	print_error2(char *shell_name, char *command,
-		char *details, char *description)
+void	print_error2(char *shell_name, char *command, char *details,
+		char *description)
 {
 	ft_putstr_fd(shell_name, STDERR_FILENO);
 	if (shell_name && (command || details || description))

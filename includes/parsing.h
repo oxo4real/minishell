@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 12:39:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 13:58:59 by mhayyoun         ###   ########.fr       */
+/*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
+/*   Updated: 2025/02/22 21:12:43 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef PARSING_H
+# define PARSING_H
+# include "utils.h"
+# include <dirent.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
+# define SH_NAME "minishell"
 # define UNEXPECTED_TK "syntax error near unexpected token"
 # define SYNTAX_ERR "syntax error"
-# define SH_NAME "minishell"
 # define BOLD_RED "\033[1;31m"
 # define RESET "\033[0m"
+# define WR_END 1
+# define RD_END 0
 
 typedef enum e_token
 {
@@ -38,18 +42,41 @@ typedef enum e_token
 	END
 }					t_token;
 
+typedef struct s_gb
+{
+	int				ex_code;
+}					t_gb;
+
+extern t_gb			g_gb;
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
+
+typedef struct s_slist
+{
+	char			*str;
+	struct s_slist	*next;
+}					t_slist;
+
 typedef struct s_redir
 {
-	t_token			type;
 	char			*filename;
 	struct s_redir	*next;
+	t_token			type;
+	int				fd;
 }					t_redir;
 
 typedef struct s_node
 {
 	t_token			type;
 	char			*cmd;
+	char			**args;
 	t_redir			*redir;
+	int				fd[2];
 	struct s_node	*r_child;
 	struct s_node	*next;
 	struct s_node	*l_child;
@@ -60,6 +87,7 @@ char				*ft_strdup(const char *str);
 size_t				ft_strlen(const char *s);
 char				*ft_strtrim(char const *s1, char const *set);
 void				*ft_calloc(size_t count, size_t size);
+char				**ft_split(char const *s, char c);
 void				print_unexpected(char *msg);
 void				print_syntax_error(char *msg);
 
@@ -103,9 +131,11 @@ t_node				*handle_cmd(char *s, int *i);
 bool				look_for_redir(t_node *node);
 // ####################### - TOKENIZER - #########################
 
-// ######################### - PARSER - ##########################
-bool				parser(char *line);
-// ######################### - PARSER - ##########################
+// ######################## - PARSING - ##########################
+t_node				*parser(char *line);
+char				**extract_args(char *s);
+char				*polish_arg(char *s);
+// ######################## - PARSING - ##########################
 
 // ########################## - TREE - ###########################
 void				free_tree(t_node *head);
@@ -117,5 +147,30 @@ t_node				*shunting_yard(t_node *head);
 void				move_and_convrt(t_node **polished, t_node **op);
 t_node				*pop_node(t_node **head);
 // ##################### - SHUNTING YARD - #######################
+
+// ######################### - ENV - #############################
+char				**envlsttoenv(t_env *env_lst);
+t_env				*envtoenvlst(char **env);
+void				envlstclear(t_env **env_lst);
+void				freestrarr(char ***arr);
+char				**split_var(char *var);
+int					expandenvlst(t_env **env_lst, char **splited);
+int					envlstlen(t_env *env_lst);
+void				replaceenvar(t_env *env_lst, char **str);
+// sus
+void				sptobel(char *str);
+// ######################### - ENV - #############################
+
+// ####################### - WILDCARD - ##########################
+void				*free_slist(t_slist *slist);
+char				*joinslist(t_slist *slist, char *sep);
+int					match_wildcard(char *s, char *p);
+t_slist				*insert_sorted(t_slist **head, char *str);
+char				*getsortedwildcard(char *wildcard);
+void				replacewildcards(char **str);
+// ####################### - WILDCARD - ##########################
+
+void				do_here_doc(t_node *head, t_env *env_lst);
+t_node				*pop(t_node **head);
 
 #endif

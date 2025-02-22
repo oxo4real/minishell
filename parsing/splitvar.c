@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   splitvar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 10:07:51 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/10 13:11:08 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "parsing.h"
 
 static char	**alloc_rendu(char *var);
 

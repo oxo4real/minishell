@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free2darr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:42:43 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/05 15:03:53 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:36:37 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "utils.h"
 
 void	freestrarr(char ***arr)
 {

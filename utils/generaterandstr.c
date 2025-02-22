@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   generaterandstr.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 12:07:29 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/17 15:14:00 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:49:56 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "utils.h"
 
 #define MAX_SIZE 50
 #define MIN_SIZE 10
 
-char		*ft_strjoin(char const *s1, char const *s2, char const *sep);
 static char	*fill_str(int length);
 
 char	*generaterandstr(void)

@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   getsortedwildcard_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:24:23 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/19 12:47:42 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-typedef struct s_slist
-{
-	char			*str;
-	struct s_slist	*next;
-}	t_slist;
-
-char	*ft_strjoin(char const *s1, char const *s2, char const *sep);
-char	*ft_strdup(const char *s);
+#include "parsing.h"
 
 void	*free_slist(t_slist *slist)
 {

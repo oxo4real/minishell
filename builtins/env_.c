@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:52:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:52:20 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:43:56 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-char	**envlsttoenv(t_env *env_lst);
-void	envlstclear(t_env **env_lst);
-void	freestrarr(char ***arr);
+#include "builtins.h"
 
 void	env_(t_env *env_lst)
 {

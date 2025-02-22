@@ -3,23 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expandenvlst.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 13:17:59 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 13:18:35 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "parsing.h"
 
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-int	expandenvlst(t_env **env_lst, char	**splited)
+int	expandenvlst(t_env **env_lst, char **splited)
 {
 	t_env	*new;
 	t_env	*head;

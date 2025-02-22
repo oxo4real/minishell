@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 13:06:32 by aaghzal           #+#    #+#             */
-/*   Updated: 2024/06/27 17:33:22 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:42:45 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchar_fd(char c, int fd);
+#include "utils.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
 	char			c;
 	unsigned int	nb;
 
-	nb = (unsigned int) n;
+	nb = (unsigned int)n;
 	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);

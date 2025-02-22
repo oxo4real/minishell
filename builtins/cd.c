@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:10:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/19 13:01:10 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:56:33 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-void	print_error(char *shell_name, char *command, char *details);
-int		ft_strcmp(const char *s1, const char *s2);
-int		expandenvlst(t_env **env_lst, char	**splited);
-void	export(char **av, t_env **env_lst);
-char	*ft_strdup(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2, char const *sep);
-void	print_error2(char *shell_name, char *command,
-			char *details, char *description);
-
-int		gohome(t_env **env_lst);
-void	set_env(t_env **env_lst);
+#include "builtins.h"
 
 void	cd(char **av, t_env **env_lst)
 {
@@ -72,13 +51,13 @@ void	set_env(t_env **env_lst)
 		av[1] = ft_strdup("OLDPWD");
 	else
 		av[1] = ft_strjoin("OLDPWD", pwd->value, "=");
-	export(av, env_lst);
+	_export(av, env_lst);
 	free(av[1]);
 	newpwd = getcwd(NULL, 0);
 	if (!newpwd)
 		av[1] = ft_strdup("PWD");
 	else
 		av[1] = ft_strjoin("PWD", newpwd, "=");
-	export(av, env_lst);
+	_export(av, env_lst);
 	return (free(newpwd), free(av[1]));
 }

@@ -3,32 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   getsortedwildcard.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:42:17 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/19 12:48:40 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <dirent.h>
-
-typedef struct s_slist
-{
-	char			*str;
-	struct s_slist	*next;
-}	t_slist;
-
-int				match_wildcard(char *s, char *p);
-int				ft_strcmp(const char *s1, const char *s2);
-char			*ft_strdup(const char *s);
-void			*free_slist(t_slist *slist);
-char			*joinslist(t_slist *slist, char *sep);
+#include "parsing.h"
 
 static int		staroutquotes(char *wildcard);
 static void		skipquote(int *i, char *str);
 static t_slist	*getslist(char *wildcard);
-t_slist			*insert_sorted(t_slist **head, char *str);
 
 char	*getsortedwildcard(char *wildcard)
 {

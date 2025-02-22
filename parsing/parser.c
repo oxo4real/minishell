@@ -6,11 +6,11 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:15:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 18:26:31 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parsing.h"
 
 void	print_nodes(t_node *head)
 {
@@ -35,7 +35,44 @@ void	print_nodes(t_node *head)
 	}
 }
 
-bool	parser(char *line)
+t_node	*pop(t_node **head)
+{
+	t_node	*poped;
+
+	poped = NULL;
+	if (!*head)
+		return (NULL);
+	poped = *head;
+	*head = poped->next;
+	poped->next = NULL;
+	return (poped);
+}
+
+void	print_tree_preorder(t_node *head)
+{
+	t_node	*stack;
+	t_node	*curr;
+
+	stack = NULL;
+	curr = head;
+	if (!curr)
+		return ;
+	nodeadd_front(&stack, curr);
+	while (stack)
+	{
+		curr = pop(&stack);
+		if (curr->type == STR)
+			printf("%s\n", curr->cmd);
+		else
+			printf("%s\n", match_tk_name(curr->type));
+		if (curr->r_child)
+			nodeadd_front(&stack, curr->r_child);
+		if (curr->l_child)
+			nodeadd_front(&stack, curr->l_child);
+	}
+}
+
+t_node	*parser(char *line)
 {
 	char	*s;
 	t_node	*head;
@@ -44,15 +81,11 @@ bool	parser(char *line)
 	s = ft_strtrim(line, " \t\v\n\f\r");
 	free(line);
 	if (!s)
-		return (1);
+		return (NULL);
 	if (check_begining(s))
-		return (free(s), 1);
+		return (free(s), NULL);
 	if (tokenizer(s, &head))
-		return (free(s), clear_nodes(&head), 1);
+		return (free(s), clear_nodes(&head), NULL);
 	free(s);
-	// print_nodes(head);
-	head = shunting_yard(head);
-	print_tree(head);
-	free_tree(head);
-	return (0);
+	return (shunting_yard(head));
 }

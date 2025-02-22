@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   replacewildcards.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:45:12 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/19 12:51:52 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-size_t		ft_strlen(const char *s);
-char		*ft_strjoin(char const *s1, char const *s2, char const *sep);
-char		*getsortedwildcard(char *wildcard);
+#include "parsing.h"
 
 static void	replacewildcard(char **str, char *tmp, int *i);
 static void	removemainqotes(char *str);
@@ -56,7 +52,7 @@ static void	replacewildcard(char **str, char *tmp, int *i)
 	(*str) = rendu;
 }
 
-void	removemainqotes(char *str)
+static void	removemainqotes(char *str)
 {
 	int	j;
 
@@ -77,10 +73,9 @@ static void	replace(char *str, int *j)
 	i = 0;
 	in_dq = 0;
 	in_sq = 0;
-	while (str[i] && str[i] != '\x07') 
+	while (str[i] && str[i] != '\x07')
 	{
-		if ((str[i] != '\'' && str[i] != '"')
-			|| (str[i] == '\'' && in_dq)
+		if ((str[i] != '\'' && str[i] != '"') || (str[i] == '\'' && in_dq)
 			|| (str[i] == '"' && in_sq))
 			str[(*j)++] = str[i];
 		if (str[i] == '\'' && !in_sq && !in_dq)

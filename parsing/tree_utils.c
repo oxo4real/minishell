@@ -6,20 +6,29 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:41:29 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 13:50:43 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parsing.h"
 
 void	free_node(t_node *node)
 {
+	int	i;
+
+	i = 0;
 	if (!node)
 		return ;
 	if (node->cmd)
 		(free(node->cmd), node->cmd = NULL);
 	if (node->redir)
 		clear_redir(&node->redir);
+	if (node->args)
+	{
+		while (node->args[i])
+			free(node->args[i++]);
+		free(node->args);
+	}
 	free(node);
 }
 

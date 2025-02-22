@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   is_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 19:58:45 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/04 20:47:08 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 18:50:32 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int			ft_wordcmp(char *w1, char *w2);
+#include "utils.h"
 
 static int	ft_longlen(char *w);
 
 int	ft_islong(char *w)
 {
-	int		int_len;
-	int		i;
+	int	int_len;
+	int	i;
 
 	i = 0;
 	int_len = ft_longlen(w);
@@ -27,16 +27,14 @@ int	ft_islong(char *w)
 	{
 		if (int_len < -19)
 			return (0);
-		else if (int_len == -19
-			&& ft_wordcmp(&w[i], "9223372036854775808") > 0)
+		else if (int_len == -19 && ft_wordcmp(&w[i], "9223372036854775808") > 0)
 			return (0);
 	}
 	else
 	{
 		if (int_len > 19)
 			return (0);
-		else if (int_len == 19
-			&& ft_wordcmp(&w[i], "9223372036854775807") > 0)
+		else if (int_len == 19 && ft_wordcmp(&w[i], "9223372036854775807") > 0)
 			return (0);
 	}
 	return (1);
@@ -44,9 +42,9 @@ int	ft_islong(char *w)
 
 static int	ft_longlen(char *w)
 {
-	int		i;
-	int		count;
-	int		signe;
+	int	i;
+	int	count;
+	int	signe;
 
 	i = 0;
 	count = 0;

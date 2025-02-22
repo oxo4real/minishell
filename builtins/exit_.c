@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit_.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:19:06 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/06 10:51:01 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/22 19:46:46 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-
-int			ft_atoi(char *str);
-void		print_error2(char *shell_name, char *command,
-				char *details, char *description);
-int			ft_islong(char *s);
-void		ft_putstr_fd(char const *s, int fd);
+#include "builtins.h"
 
 static int	count_args(char **av);
 static int	is_valid(char *s);

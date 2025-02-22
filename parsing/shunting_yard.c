@@ -6,24 +6,12 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:11:52 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/19 18:00:11 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parsing.h"
 
-/**
- * @brief Removes and returns the first node from a linked list of AST nodes.
- *
- * This function extracts the first node from the list,
-	updating the head pointer.
- * If the extracted node is of type STR,
-	its child and next pointers are set to NULL
- * to ensure proper cleanup.
- *
- * @param head A pointer to the head of the linked list of AST nodes.
- * @return A pointer to the popped node, or NULL if the list is empty.
- */
 t_node	*pop_node(t_node **head)
 {
 	t_node	*poped;
@@ -84,20 +72,6 @@ static void	shunting_yard_helper(t_node *head, t_node **polished, t_node **op)
 		nodeadd_front(op, head);
 	}
 }
-
-/**
- * @brief Converts a linked list of nodes into an Abstract Syntax Tree (AST)
- *			using the Shunting Yard algorithm.
- *
- * This function processes a list of nodes representing shell
- * commands and operators,
- * building an AST by applying the **Shunting Yard algorithm**.
- * It ensures correct precedence
- * handling for logical and redirection operators.
- *
- * @param head The head of the tokenized command list.
- * @return A pointer to the root node of the generated AST.
- */
 
 t_node	*shunting_yard(t_node *head)
 {
