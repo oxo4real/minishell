@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall# -fsanitize=address,undefined
 SRCS =
 
 #UTILS
@@ -26,7 +26,7 @@ SRCS += parsing/envlstclear.c parsing/envlsttoenv.c parsing/envtoenvlst.c parsin
 #PARSING
 
 #EXECUTING
-SRCS += executing/cmd.c executing/exec_.c executing/executor.c executing/get_path.c
+SRCS += executing/cmd.c executing/exec_.c executing/executor.c executing/get_path.c executing/redir.c executing/builtins.c
 #EXECUTING
 
 

@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 21:12:43 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/23 19:42:56 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 # define SH_NAME "minishell"
@@ -26,6 +27,8 @@
 # define RESET "\033[0m"
 # define WR_END 1
 # define RD_END 0
+# define IN_MODE 0x601
+# define APPNED_MODE 0x209
 
 typedef enum e_token
 {
@@ -47,7 +50,7 @@ typedef struct s_gb
 	int				ex_code;
 }					t_gb;
 
-extern t_gb			g_gb;
+// extern t_gb			g_gb;
 
 typedef struct s_env
 {
@@ -140,6 +143,7 @@ char				*polish_arg(char *s);
 // ########################## - TREE - ###########################
 void				free_tree(t_node *head);
 void				print_tree(t_node *head);
+void				print_nodes(t_node *head);
 // ########################## - TREE - ###########################
 
 // ##################### - SHUNTING YARD - #######################
@@ -156,8 +160,8 @@ void				freestrarr(char ***arr);
 char				**split_var(char *var);
 int					expandenvlst(t_env **env_lst, char **splited);
 int					envlstlen(t_env *env_lst);
-void				replaceenvar(t_env *env_lst, char **str);
 // sus
+void				replaceenvar(t_env *env_lst, char **str);
 void				sptobel(char *str);
 // ######################### - ENV - #############################
 
@@ -170,7 +174,7 @@ char				*getsortedwildcard(char *wildcard);
 void				replacewildcards(char **str);
 // ####################### - WILDCARD - ##########################
 
-void				do_here_doc(t_node *head, t_env *env_lst);
+bool				do_here_doc(t_node *head, t_env *env_lst);
 t_node				*pop(t_node **head);
 
 #endif

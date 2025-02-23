@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:52:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 19:43:56 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:43:12 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	env_(t_env *env_lst)
 		printf("%s\n", env[i]);
 		i++;
 	}
-	envlstclear(&env_lst);
+	// envlstclear(&env_lst);
 	freestrarr(&env);
-	exit(EXIT_SUCCESS);
+	// exit(EXIT_SUCCESS);
 }

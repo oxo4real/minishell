@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:48:24 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/23 14:42:30 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	clear_traces(char *s, size_t i, char q)
 			i++;
 			continue ;
 		}
-		if (s[i] == ' ')
+		if (s[i] == ' ' || match_tk(&s[i]) != STR)
 			break ;
 		s[i] = ' ';
 		i++;
@@ -43,7 +43,7 @@ static char	*aloc_fname(char *s, size_t i, char q)
 			i++;
 			continue ;
 		}
-		if (s[i] == ' ')
+		if (s[i] == ' ' || match_tk(&s[i]) != STR)
 			break ;
 		i++;
 	}

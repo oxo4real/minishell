@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:24:30 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:41:54 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static bool	handle_sep(char *s, int *i, t_node **nodes)
 		(*i)++;
 	if (!s[*i] || (!is_cmd(&s[*i]) && match_tk(&s[*i]) != LPR))
 	{
-		print_unexpected(match_tk_str(match_tk(&s[*i])));
+		print_syntax_error("unexpected end of file");
 		return (1);
 	}
 	return (0);

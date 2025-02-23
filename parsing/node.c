@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:41:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:30:13 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_node	*nodenew(t_token type, char *cmd)
 		return (NULL);
 	new->type = type;
 	new->cmd = cmd;
-	new->fd[WR_END] = WR_END;
-	new->fd[RD_END] = RD_END;
+	new->fd[WR_END] = -42;
+	new->fd[RD_END] = -42;
 	return (new);
 }
 

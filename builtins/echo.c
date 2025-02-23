@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 19:35:43 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:35:57 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	echo(char **av)
 	}
 	while (av[i])
 	{
-		print_error("minishell", "echo", "write error");
+		ft_putstr_fd(av[i], 1);
 		if (av[i + 1])
-			printf(" ");
+			ft_putchar_fd(' ', 1);
 		i++;
 	}
 	if (newline)
 		printf("\n");
-	exit(EXIT_SUCCESS);
+	// exit(EXIT_SUCCESS);
 }
 
 static int	is_flag(const char *s)

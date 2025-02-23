@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:15:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/23 14:44:57 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ t_node	*parser(char *line)
 	if (tokenizer(s, &head))
 		return (free(s), clear_nodes(&head), NULL);
 	free(s);
+	// print_nodes(head);
+	// clear_nodes(&head);
+	// return (NULL);
 	return (shunting_yard(head));
 }
