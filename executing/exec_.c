@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:02:49 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/23 19:45:20 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:51:41 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	exec_cmd(t_node *head, t_exec *x)
 	head->args = extract_args(head->cmd);
 	if (!head->args)
 		return ;
+	if (builtins(head, x))
+		return ;
 	head->args[0] = get_path(head->args[0]);
 	if (!head->args[0])
-		return ;
-	if (builtins(head, x))
 		return ;
 	exec_cmd_helper(head, x);
 }
