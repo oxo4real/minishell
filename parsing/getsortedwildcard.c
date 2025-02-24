@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:42:17 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/24 18:49:13 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/24 20:17:40 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static int	staroutquotes(char *wildcard)
 	int	i;
 
 	i = 0;
-	while (wildcard[i] && wildcard[i] != '\x07')
+	while (wildcard[i] && wildcard[i] != SEP)
 	{
 		if (wildcard[i] == '*')
 			return (1);
 		else if (wildcard[i] == '\'' && wildcard[i] == '"')
 		{
 			skipquote(&i, wildcard);
-			if (!(wildcard[i] && wildcard[i] != '\x07'))
+			if (!(wildcard[i] && wildcard[i] != SEP))
 				return (0);
 		}
 		i++;
@@ -54,7 +54,7 @@ static void	skipquote(int *i, char *str)
 	char	quote;
 
 	quote = str[(*i)++];
-	while (str[*i] && str[*i] != quote && str[*i] != '\x07')
+	while (str[*i] && str[*i] != quote && str[*i] != SEP)
 		(*i)++;
 }
 

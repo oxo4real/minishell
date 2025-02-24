@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   match_wildcard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:53:01 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:02:49 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	match_wildcard(char *s, char *p)
 	char	*tmp;
 
 	last_star = NULL;
-	while ((*s) && (*s) != '\x07')
+	while ((*s) && (*s) != SEP)
 	{
 		if (*p == '*')
 		{
@@ -46,7 +46,7 @@ int	match_wildcard(char *s, char *p)
 
 static int	checkallstars(const char *p)
 {
-	while (*p && *p != '\x07')
+	while (*p && *p != SEP)
 	{
 		if (*p != '*')
 			return (0);

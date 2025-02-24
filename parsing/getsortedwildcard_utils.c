@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getsortedwildcard_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:24:23 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:17:34 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ char	*joinslist(t_slist *slist, char *sep)
 	head = slist;
 	if (!head || !rendu)
 		return (free(rendu), free_slist(slist));
-	if (!head->next)
-	{
-		free(rendu);
-		rendu = ft_strdup(slist->str);
-		return (free_slist(slist), rendu);
-	}
 	while (head)
 	{
 		tmp = ft_strjoin(rendu, head->str, sep);

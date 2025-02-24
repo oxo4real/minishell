@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replacewildcards.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 16:45:12 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:08:27 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	replacewildcards(char **str)
 	i = ft_strlen((*str));
 	while (i-- > 0)
 	{
-		if ((*str)[i] != '\x07')
+		if ((*str)[i] != SEP)
 			replacewildcard(str, &((*str)[i]), &i);
 	}
 }
@@ -35,7 +35,7 @@ static void	replacewildcard(char **str, char *tmp, int *i)
 	char	*sep;
 	char	*rendu;
 
-	while ((*i) > -1 && (*str)[*i] != '\x07')
+	while ((*i) > -1 && (*str)[*i] != SEP)
 		(*i)--;
 	sep = getsortedwildcard(&(*str)[(*i) + 1]);
 	if (!sep)
@@ -60,8 +60,8 @@ static void	removemainqotes(char *str)
 		return ;
 	j = 0;
 	replace(str, &j);
-	while (str[j] && str[j] != '\x07')
-		str[j++] = '\x07';
+	while (str[j] && str[j] != SEP)
+		str[j++] = SEP;
 }
 
 static void	replace(char *str, int *j)
@@ -73,7 +73,7 @@ static void	replace(char *str, int *j)
 	i = 0;
 	in_dq = 0;
 	in_sq = 0;
-	while (str[i] && str[i] != '\x07')
+	while (str[i] && str[i] != SEP)
 	{
 		if ((str[i] != '\'' && str[i] != '"') || (str[i] == '\'' && in_dq)
 			|| (str[i] == '"' && in_sq))

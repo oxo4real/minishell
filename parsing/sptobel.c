@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sptobel.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:46:07 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:02:49 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sptobel(char *str)
 		if (str[i] == '\'' || str[i] == '"')
 			skipquote(&i, str);
 		else if (str[i] == ' ')
-			str[i] = '\x07';
+			str[i] = SEP;
 		i++;
 	}
 }

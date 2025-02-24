@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/23 19:42:56 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:17:56 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_gb
 }					t_gb;
 
 // extern t_gb			g_gb;
+
+#define SEP '\x07'
 
 typedef struct s_env
 {
