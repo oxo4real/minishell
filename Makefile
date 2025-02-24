@@ -22,7 +22,7 @@ SRCS += parsing/envlstclear.c parsing/envlsttoenv.c parsing/envtoenvlst.c parsin
 		parsing/replaceenvvar.c parsing/replacewildcards.c parsing/shunting_yard.c parsing/splitvar.c \
 		parsing/sptobel.c parsing/tk_match.c parsing/tk_types.c parsing/tk_utils.c parsing/tokenizer.c \
 		parsing/tokenizer_handle_cmd.c parsing/tokenizer_handle_par.c parsing/tokenizer_handle_redir.c \
-		parsing/tree_utils.c parsing/extract_args.c
+		parsing/tree_utils.c parsing/extract_args.c parsing/cmdtoav.c
 #PARSING
 
 #EXECUTING
