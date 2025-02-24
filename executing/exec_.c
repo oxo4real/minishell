@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:02:49 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/24 10:51:41 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:44:23 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ void	exec_cmd_helper(t_node *head, t_exec *x)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (head->fd[WR_END] != -42)
-		{
-			dup2(head->fd[WR_END], 1);
-			close(head->fd[WR_END]);
-		}
-		if (head->fd[RD_END] != -42)
-		{
-			dup2(head->fd[RD_END], 0);
-			close(head->fd[RD_END]);
-		}
 		execve(head->args[0], head->args, x->env);
 		dprintf(2, SH_NAME ": %s: command not found\n", head->args[0]);
 		exit(127);
@@ -41,13 +31,23 @@ void	exec_cmd_helper(t_node *head, t_exec *x)
 
 void	exec_cmd(t_node *head, t_exec *x)
 {
-	handle_redir(head, x->lst);
+	if (handle_redir(head, x->lst))
+		return ;
 	if (!head->cmd)
 		return ;
-	replaceenvar(x->lst, &head->cmd);
-	head->args = extract_args(head->cmd);
+	head->args = cmdtoav(&head->cmd, x->lst);
 	if (!head->args)
 		return ;
+	if (head->fd[WR_END] != -42)
+	{
+		dup2(head->fd[WR_END], 1);
+		close(head->fd[WR_END]);
+	}
+	if (head->fd[RD_END] != -42)
+	{
+		dup2(head->fd[RD_END], 0);
+		close(head->fd[RD_END]);
+	}
 	if (builtins(head, x))
 		return ;
 	head->args[0] = get_path(head->args[0]);

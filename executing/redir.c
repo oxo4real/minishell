@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:55:48 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/23 18:56:09 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:44:01 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static bool	handle_redir_helper(t_token tk, t_node *head, t_redir *r)
 		else
 			head->fd[WR_END] = open(r->filename, IN_MODE, 0777);
 		if (head->fd[WR_END] < 0)
+		{
+			print_error(SH_NAME, NULL, r->filename);
 			return (1);
+		}
 	}
 	if (tk == IN || tk == HEREDOC)
 	{

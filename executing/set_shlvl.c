@@ -3,32 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set_shlvl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:31:48 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/08 16:39:33 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/24 21:30:48 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-
-typedef struct s_env
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-int			ft_strcmp(const char *s1, const char *s2);
-int			ft_isdigit(int c);
-int			ft_atoi(char *str);
-char		*ft_itoa(int n);
-char		*ft_strjoin(char const *s1, char const *s2, char const *sep);
-void		export(char **av, t_env **env_lst);
-char		*ft_strdup(const char *s);
-void		ft_putstr_fd(char const *s, int fd);
-void		ft_putnbr_fd(int n, int fd);
+#include "builtins.h"
+#include "executing.h"
 
 static int	isvalid(t_env *shlvl);
 static int	set_av1(char **av, t_env *shlvl);
@@ -45,7 +28,7 @@ void	set_shlvl(t_env **env_lst)
 	if (!set_av1(av, shlvl))
 		return ;
 	av[2] = NULL;
-	export(av, env_lst);
+	_export(av, env_lst);
 	free(av[1]);
 }
 

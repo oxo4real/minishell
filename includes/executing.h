@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 20:52:00 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/23 18:56:20 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:54:23 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct s_exec
 {
 	t_env	*lst;
 	char	**env;
-	int		fd[2];
 	int		status;
 }			t_exec;
 
@@ -32,5 +31,6 @@ char		*get_path(char *cmd);
 void		expand_cmds(t_node *head, t_exec *x);
 bool		builtins(t_node *head, t_exec *x);
 bool		handle_redir(t_node *head, t_env *env_lst);
+void		set_shlvl(t_env **env_lst);
 
 #endif

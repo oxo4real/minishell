@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/24 20:17:56 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/24 21:36:05 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,9 @@ typedef enum e_token
 	END
 }					t_token;
 
-typedef struct s_gb
-{
-	int				ex_code;
-}					t_gb;
+extern int			g_sig;
 
-// extern t_gb			g_gb;
-
-#define SEP '\x07'
+# define SEP '\x07'
 
 typedef struct s_env
 {
@@ -138,8 +133,11 @@ bool				look_for_redir(t_node *node);
 
 // ######################## - PARSING - ##########################
 t_node				*parser(char *line);
+// [DEPRECTAED]
 char				**extract_args(char *s);
+// [DEPRECTAED]
 char				*polish_arg(char *s);
+char				**cmdtoav(char **cmd, t_env *env_lst);
 // ######################## - PARSING - ##########################
 
 // ########################## - TREE - ###########################

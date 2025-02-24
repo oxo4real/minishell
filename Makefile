@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Werror -Wextra -Wall# -fsanitize=address,undefined
+CFLAGS = -Werror -Wextra -Wall -g# -fsanitize=address,undefined
 SRCS =
 
 #UTILS
@@ -9,11 +9,6 @@ SRCS += utils/free2darr.c utils/ft_atoi.c utils/ft_calloc.c utils/ft_isalnum.c u
 		utils/ft_strjoin.c utils/ft_strlen.c utils/ft_strncmp.c utils/ft_strtrim.c utils/ft_wordcmp.c \
 		utils/generaterandstr.c utils/is_long.c utils/print_error.c utils/print_error2.c utils/print_error3.c
 #UTILS
-
-#BUILTINS
-SRCS += builtins/cd.c builtins/echo.c builtins/env_.c builtins/exit_.c builtins/export.c builtins/pexport.c \
-		builtins/pwd.c builtins/unset.c
-#BUILTINS
 
 #PARSING
 SRCS += parsing/envlstclear.c parsing/envlsttoenv.c parsing/envtoenvlst.c parsing/expandenvlst.c \
@@ -25,8 +20,13 @@ SRCS += parsing/envlstclear.c parsing/envlsttoenv.c parsing/envtoenvlst.c parsin
 		parsing/tree_utils.c parsing/extract_args.c parsing/cmdtoav.c
 #PARSING
 
+#BUILTINS
+SRCS += builtins/cd.c builtins/echo.c builtins/env_.c builtins/exit_.c builtins/export.c builtins/pexport.c \
+		builtins/pwd.c builtins/unset.c
+#BUILTINS
+
 #EXECUTING
-SRCS += executing/cmd.c executing/exec_.c executing/executor.c executing/get_path.c executing/redir.c executing/builtins.c
+SRCS += executing/cmd.c executing/exec_.c executing/executor.c executing/get_path.c executing/redir.c executing/builtins.c executing/set_shlvl.c
 #EXECUTING
 
 
@@ -35,20 +35,31 @@ OBJS = $(patsubst %.c, $(BUILD)/%.o, $(SRCS))
 INCS = includes
 HEADERS = $(INCS)/parsing.h $(INCS)/utils.h $(INCS)/builtins.h $(INCS)/executing.h
 NAME = minishell
+TOTAL := $(words $(OBJS))
+COUNT := 0
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $^ -o $(NAME) -lreadline
+	@echo "compiled ✅"
 
 $(BUILD)/%.o: %.c $(HEADERS)
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -I$(INCS) -c $< -o $@
+	$(call progress)
+	@$(CC) $(CFLAGS) -I$(INCS) -c $< -o $@
+	@printf "\33c\e[3J"
 
 clean:
-	rm -rf $(BUILD)
+	@rm -rf $(BUILD)
+	@echo "Cleaned up 🧹"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
+
+define progress
+	$(eval COUNT=$(shell echo $$(($(COUNT) + 1))))
+	@echo "[ $(COUNT)/$(TOTAL) ] Compiling: $<\r"
+endef
