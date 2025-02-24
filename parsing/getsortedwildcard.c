@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   getsortedwildcard.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 09:42:17 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:49:13 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "utils.h"
 
 static int		staroutquotes(char *wildcard);
 static void		skipquote(int *i, char *str);
@@ -72,7 +73,8 @@ static t_slist	*getslist(char *wildcard)
 		file = readdir(dir);
 		if (!file)
 			return (closedir(dir), slist);
-		if (match_wildcard(file->d_name, wildcard))
+		if (!(file->d_name[0] == '.' && wildcard[0] != '.')
+			&& match_wildcard(file->d_name, wildcard))
 			insert_sorted(&slist, file->d_name);
 	}
 }
