@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:10:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 19:44:33 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:41:04 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "executing.h"
 
 void	cd(char **av, t_env **env_lst, t_exec *x)
 {

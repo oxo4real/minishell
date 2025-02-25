@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:04:21 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 13:30:48 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:41:11 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "executing.h"
 
 static void	freenode(t_env **node);
 static bool	valid_identifier(char *s, t_exec *x);

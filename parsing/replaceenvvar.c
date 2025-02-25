@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   replaceenvvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 20:04:57 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:40:51 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "utils.h"
 
 static void	skipquote(int *i, char *str);
 static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x);
@@ -82,7 +81,7 @@ static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x)
 
 static char	*findenvvar(char *dollar, size_t i, t_env *env_lst, t_exec *x)
 {
-	if (ft_strncmp("?", dollar,1) == 0)
+	if (ft_strncmp("?", dollar, 1) == 0)
 		return (ft_itoa(x->status));
 	while (env_lst)
 	{

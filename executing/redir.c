@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:55:48 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 20:01:03 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:51:16 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ bool	handle_redir(t_node *head, t_exec *x)
 
 	if (!head || !head->redir)
 		return (0);
+	x->status = 1;
 	r = head->redir;
 	while (r)
 	{
@@ -108,5 +109,6 @@ bool	handle_redir(t_node *head, t_exec *x)
 			return (1);
 		r = r->next;
 	}
+	x->status = 0;
 	return (0);
 }

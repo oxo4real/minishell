@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 13:22:37 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 13:06:32 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:40:42 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "executing.h"
 
 static void	replace(t_env *var, char ***splited, char *has_value);
 static void	append(t_env *var, char ***splited);
@@ -89,15 +88,15 @@ static bool	valid_identifier(char *s, t_exec *x)
 		if ((!ft_isalnum(*s) && (*s) != '_') || !(++s))
 		{
 			return (print_error3("minishell", "export", str,
-				"not a valid indentifier"), false);
+					"not a valid indentifier"), false);
 			x->status = 1;
 		}
 	}
 	if ((*s) == '+' && (*(s + 1)) != '=')
 	{
 		return (print_error3("minishell", "export", str,
-			"not a valid indentifier"), false);
-			x->status = 1;
+				"not a valid indentifier"), false);
+		x->status = 1;
 	}
 	return (true);
 }
