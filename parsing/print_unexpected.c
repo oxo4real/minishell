@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
+/*   print_unexpected.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 11:31:28 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 18:35:29 by mhayyoun         ###   ########.fr       */
+/*   Created: 2025/02/25 18:06:16 by mhayyoun          #+#    #+#             */
+/*   Updated: 2025/02/25 18:27:29 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
-#include "executing.h"
+#include "parsing.h"
 
-void	init_env(t_env **env_lst)
+void	print_unexpected(char *msg)
 {
-	char	*av[3];
-
-	av[2] = NULL;
-	set_shlvl(env_lst);
-	av[1] = ".";
-	cd(av, env_lst);
-	av[1] = "OLDPWD";
-	unset(av, env_lst);
-	_export(av, env_lst);
+	ft_putstr_fd(SH_NAME ": ", 2);
+	ft_putstr_fd(UNEXPECTED_TK " ", 2);
+	ft_putchar_fd('`', 2);
+	ft_putstr_fd(msg, 2);
+	ft_putchar_fd('\'', 2);
+	ft_putchar_fd('\n', 2);
 }

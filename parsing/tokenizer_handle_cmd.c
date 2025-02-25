@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:44:45 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:33:10 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	polish_cmd(t_node *node)
 	node->cmd = NULL;
 }
 
-t_node	*handle_cmd(char *s, int *i)
+t_node	*handle_cmd(char *s, int *i, t_exec *x)
 {
 	int		j;
 	int		k;
@@ -99,10 +99,10 @@ t_node	*handle_cmd(char *s, int *i)
 	if (next_token(&s[*i + k]) == LPR)
 	{
 		print_unexpected(match_tk_str(LPR));
-		return (NULL);
+		return (x->status = 258, NULL);
 	}
 	if (check_syntax_redir(s, *i, *i + k))
-		return (NULL);
+		return (x->status = 258, NULL);
 	cmd = strdup_to(&s[*i], (size_t)k - (size_t)j);
 	if (!cmd)
 		return (NULL);

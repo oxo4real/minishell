@@ -6,12 +6,11 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 20:52:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/24 21:35:53 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:40:23 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
-#include "parsing.h"
 
 void	executor(t_node *head, t_exec *x)
 {

@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_shlvl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:31:48 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 10:03:44 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 18:35:50 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "executing.h"
-#include "parsing.h"
-#include "utils.h"
 
 static int	isvalid(t_env *shlvl);
 static int	set_av1(char **av, t_env *shlvl);

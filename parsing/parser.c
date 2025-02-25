@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:15:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/23 14:44:57 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:58:23 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,19 @@ void	print_tree_preorder(t_node *head)
 	}
 }
 
-t_node	*parser(char *line)
+t_node	*parser(char *line, t_exec *x)
 {
 	char	*s;
-	t_node	*head;
 
-	head = NULL;
+	x->head = NULL;
 	s = ft_strtrim(line, " \t\v\n\f\r");
 	free(line);
 	if (!s)
 		return (NULL);
 	if (check_begining(s))
-		return (free(s), NULL);
-	if (tokenizer(s, &head))
-		return (free(s), clear_nodes(&head), NULL);
+		return (free(s), x->status = 258, NULL);
+	if (tokenizer(s, x))
+		return (free(s), clear_nodes(&x->head), NULL);
 	free(s);
-	// print_nodes(head);
-	// clear_nodes(&head);
-	// return (NULL);
-	return (shunting_yard(head));
+	return (shunting_yard(x->head));
 }

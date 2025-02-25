@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:40:31 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:57:38 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static bool	check_par(char *s, int i, int *par)
 	return (0);
 }
 
-bool	handle_par(char *s, int *i, t_node **nodes, int *par)
+int	handle_par(char *s, int *i, int *par, t_exec *x)
 {
 	t_token	tk;
 	t_token	ntk;
@@ -61,11 +61,11 @@ bool	handle_par(char *s, int *i, t_node **nodes, int *par)
 			&& ntk != END))
 	{
 		print_unexpected(match_tk_str(tk));
-		return (1);
+		return (x->status = 258, 1);
 	}
 	if (check_par(s, *i, par))
-		return (1);
-	if (handle_node(nodes, s, i))
+		return (x->status = 258, 1);
+	if (handle_node(s, i, x))
 		return (1);
 	(*i)++;
 	while (is_space(s[*i]))
@@ -73,7 +73,7 @@ bool	handle_par(char *s, int *i, t_node **nodes, int *par)
 	if ((!s[*i] || !is_cmd(&s[*i])) && tk != RPR && match_tk(&s[*i]) != LPR)
 	{
 		print_unexpected(match_tk_str(match_tk(&s[*i])));
-		return (1);
+		return (x->status = 258, 1);
 	}
 	return (0);
 }

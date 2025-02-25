@@ -6,46 +6,36 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 21:50:53 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/24 21:44:56 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:16:08 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <signal.h>
+#include "parsing.h"
 
 int		g_sig = 0;
-void	print_unexpected(char *msg)
-{
-	printf("%s: %s `%s'\n", SH_NAME, UNEXPECTED_TK, msg);
-}
-
-void	print_syntax_error(char *msg)
-{
-	printf("%s: %s: %s\n", SH_NAME, SYNTAX_ERR, msg);
-}
 
 void	ll(void)
 {
 	system("leaks -q minishell");
 }
 
-char	*get_line(t_exec *x)
+char	*get_line(void)
 {
 	int		fd;
 	char	*prompt;
 	char	*line;
 
-	if (g_sig == 130)
-	{
-		g_sig = 0;
-		x->status = 130;
-		ft_putstr_fd("\n", 2);
-	}
 	prompt = "";
 	if (isatty(STDIN_FILENO))
+	{
 		prompt = BOLD_RED SH_NAME " > " RESET;
+		if (g_sig == 130)
+		{
+			write(STDERR_FILENO, "\n", 1);
+			g_sig = 0;
+		}
+	}
 	fd = dup(1);
 	dup2(2, 1);
 	line = readline(prompt);
@@ -54,43 +44,34 @@ char	*get_line(t_exec *x)
 	return (line);
 }
 
-void	interrupt(int sig)
+void	init(int fds[2], char *env[], t_exec *x)
 {
-	(void)sig;
-	if (g_sig)
-	{
-		g_sig = 130;
-		return ;
-	}
-	write(STDERR_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	fds[1] = dup(STDOUT_FILENO);
+	fds[0] = dup(STDIN_FILENO);
+	signal(SIGINT, interrupt);
+	signal(SIGQUIT, quit);
+	x->lst = envtoenvlst(env);
+	x->status = 0;
+	rl_catch_signals = 0;
+	init_env(&x->lst);
 }
 
-void	quit(int sig)
+void	reset_in_out(t_exec *x)
 {
-	(void)sig;
+	dup2(x->fds[1], 1);
+	dup2(x->fds[0], 0);
 }
 
 int	main(int ac, char *av[], char *env[])
 {
 	char	*line;
 	t_exec	x;
-	int		fd;
-	int		fd2;
 
-	rl_catch_signals = 0;
-	fd = dup(STDOUT_FILENO);
-	fd2 = dup(STDIN_FILENO);
-	signal(SIGINT, interrupt);
-	signal(SIGQUIT, quit);
 	((void)ac, (void)av);
-	x.lst = envtoenvlst(env);
-	set_shlvl(&x.lst);
+	init(x.fds, env, &x);
 	while (1337)
 	{
-		line = get_line(&x);
+		line = get_line();
 		if (!line)
 		{
 			rl_clear_history();
@@ -104,11 +85,8 @@ int	main(int ac, char *av[], char *env[])
 			continue ;
 		}
 		add_history(line);
-		executor(parser(line), &x);
-		dup2(fd, 1);
-		dup2(fd2, 0);
+		(executor(parser(line, &x), &x), reset_in_out(&x));
 	}
-	envlstclear(&x.lst);
-	ll();
-	return (0);
+	(envlstclear(&x.lst), ll());
+	return (x.status);
 }

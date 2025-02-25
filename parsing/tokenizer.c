@@ -6,13 +6,13 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:24:30 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/23 10:41:54 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:26:17 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	handle_node(t_node **head, char *s, int *i)
+int	handle_node(char *s, int *i, t_exec *x)
 {
 	t_token	tk;
 	t_node	*new;
@@ -21,32 +21,35 @@ int	handle_node(t_node **head, char *s, int *i)
 	if (!is_cmd(&s[*i]))
 		new = nodenew(tk, NULL);
 	else
-		new = handle_cmd(s, i);
+		new = handle_cmd(s, i, x);
 	if (!new)
 		return (1);
-	nodeadd_back(head, new);
+	nodeadd_back(&x->head, new);
 	return (0);
 }
 
-static bool	handle_sep(char *s, int *i, t_node **nodes)
+static bool	handle_sep(char *s, int *i, t_exec *x)
 {
 	t_token	tk;
 
 	tk = match_tk(&s[*i]);
-	if (handle_node(nodes, s, i))
+	if (handle_node(s, i, x))
 		return (1);
 	*i += 1 + (tk == AND || tk == OR);
 	while (is_space(s[*i]))
 		(*i)++;
 	if (!s[*i] || (!is_cmd(&s[*i]) && match_tk(&s[*i]) != LPR))
 	{
-		print_syntax_error("unexpected end of file");
-		return (1);
+		if (next_token(&s[*i]) == END)
+			print_syntax_error("unexpected end of file");
+		else
+			print_unexpected(match_tk_str(next_token(&s[*i])));
+		return (x->status = 258, 1);
 	}
 	return (0);
 }
 
-bool	tokenizer(char *s, t_node **nodes)
+bool	tokenizer(char *s, t_exec *x)
 {
 	t_token	tk;
 	int		i;
@@ -61,15 +64,15 @@ bool	tokenizer(char *s, t_node **nodes)
 		tk = match_tk(&s[i]);
 		if (tk == AND || tk == OR || tk == PIPE)
 		{
-			if (handle_sep(s, &i, nodes))
+			if (handle_sep(s, &i, x))
 				return (1);
 		}
 		else if (tk == RPR || tk == LPR)
 		{
-			if (handle_par(s, &i, nodes, &par))
+			if (handle_par(s, &i, &par, x))
 				return (1);
 		}
-		else if (handle_node(nodes, s, &i))
+		else if (handle_node(s, &i, x))
 			return (1);
 	}
 	return (0);

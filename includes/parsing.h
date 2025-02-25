@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/24 21:36:05 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:09:25 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef enum e_token
 
 extern int			g_sig;
 
-# define SEP '\x07'
+# define SEP 0x07
 
 typedef struct s_env
 {
@@ -82,12 +82,15 @@ typedef struct s_node
 	struct s_node	*l_child;
 }					t_node;
 
-void				*ft_memcpy(void *dst, const void *src, size_t n);
-char				*ft_strdup(const char *str);
-size_t				ft_strlen(const char *s);
-char				*ft_strtrim(char const *s1, char const *set);
-void				*ft_calloc(size_t count, size_t size);
-char				**ft_split(char const *s, char c);
+typedef struct s_exec
+{
+	t_env			*lst;
+	char			**env;
+	t_node			*head;
+	int				fds[2];
+	int				status;
+}					t_exec;
+
 void				print_unexpected(char *msg);
 void				print_syntax_error(char *msg);
 
@@ -124,20 +127,21 @@ char				*strdup_to(const char *str, size_t size);
 // ########################## - TOKEN - ##########################
 
 // ####################### - TOKENIZER - #########################
-bool				tokenizer(char *s, t_node **nodes);
-int					handle_node(t_node **head, char *s, int *i);
-bool				handle_par(char *s, int *i, t_node **nodes, int *par);
-t_node				*handle_cmd(char *s, int *i);
+bool				tokenizer(char *s, t_exec *x);
+int					handle_node(char *s, int *i, t_exec *x);
+int					handle_par(char *s, int *i, int *par, t_exec *x);
+t_node				*handle_cmd(char *s, int *i, t_exec *x);
 bool				look_for_redir(t_node *node);
 // ####################### - TOKENIZER - #########################
 
 // ######################## - PARSING - ##########################
-t_node				*parser(char *line);
+t_node				*parser(char *line, t_exec *x);
 // [DEPRECTAED]
 char				**extract_args(char *s);
 // [DEPRECTAED]
 char				*polish_arg(char *s);
 char				**cmdtoav(char **cmd, t_env *env_lst);
+char				*getenv_(char *key, t_env *env_lst);
 // ######################## - PARSING - ##########################
 
 // ########################## - TREE - ###########################

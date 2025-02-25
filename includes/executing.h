@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 20:52:00 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/24 14:54:23 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:39:37 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 
 # include "parsing.h"
 # include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <sys/wait.h>
 
-typedef struct s_exec
-{
-	t_env	*lst;
-	char	**env;
-	int		status;
-}			t_exec;
-
-void		executor(t_node *head, t_exec *x);
-void		exec_cmd(t_node *head, t_exec *x);
-void		exec_(t_node *head, t_exec *x);
-void		exec_pipe(t_node *head, t_exec *x);
-char		*get_path(char *cmd);
-void		expand_cmds(t_node *head, t_exec *x);
-bool		builtins(t_node *head, t_exec *x);
-bool		handle_redir(t_node *head, t_env *env_lst);
-void		set_shlvl(t_env **env_lst);
+void	executor(t_node *head, t_exec *x);
+void	exec_cmd(t_node *head, t_exec *x);
+void	exec_(t_node *head, t_exec *x);
+void	exec_pipe(t_node *head, t_exec *x);
+char	*get_path(char *cmd, t_exec *x);
+void	expand_cmds(t_node *head, t_exec *x);
+bool	builtins(t_node *head, t_exec *x);
+bool	handle_redir(t_node *head, t_exec *x);
+void	set_shlvl(t_env **env_lst);
+void	init_env(t_env **env_lst);
+void	interrupt(int sig);
+void	quit(int sig);
+void	reset_in_out(t_exec *x);
+bool	if_fork(int pid);
 
 #endif
