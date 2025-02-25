@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 18:09:25 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:58:13 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ t_node				*parser(char *line, t_exec *x);
 char				**extract_args(char *s);
 // [DEPRECTAED]
 char				*polish_arg(char *s);
-char				**cmdtoav(char **cmd, t_env *env_lst);
+char				**cmdtoav(char **cmd, t_env *env_lst, t_exec *x);
 char				*getenv_(char *key, t_env *env_lst);
 // ######################## - PARSING - ##########################
 
@@ -165,7 +165,7 @@ char				**split_var(char *var);
 int					expandenvlst(t_env **env_lst, char **splited);
 int					envlstlen(t_env *env_lst);
 // sus
-void				replaceenvar(t_env *env_lst, char **str);
+void				replaceenvar(t_env *env_lst, char **str, t_exec *x);
 void				sptobel(char *str);
 // ######################### - ENV - #############################
 
@@ -178,7 +178,7 @@ char				*getsortedwildcard(char *wildcard);
 void				replacewildcards(char **str);
 // ####################### - WILDCARD - ##########################
 
-bool				do_here_doc(t_node *head, t_env *env_lst);
+bool				do_here_doc(t_node *head, t_env *env_lst, t_exec *x);
 t_node				*pop(t_node **head);
 
 #endif

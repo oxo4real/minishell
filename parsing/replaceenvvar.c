@@ -6,17 +6,18 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 15:46:26 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:04:57 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "utils.h"
 
 static void	skipquote(int *i, char *str);
-static void	replace(char **str, char *dollar, t_env *env_lst);
-static char	*findenvvar(char *dollar, size_t i, t_env *env_lst);
+static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x);
+static char	*findenvvar(char *dollar, size_t i, t_env *env_lst, t_exec *x);
 
-void	replaceenvar(t_env *env_lst, char **str)
+void	replaceenvar(t_env *env_lst, char **str, t_exec *x)
 {
 	int	i;
 	int	in_dq;
@@ -37,7 +38,7 @@ void	replaceenvar(t_env *env_lst, char **str)
 				in_dq = 0;
 		}
 		else if ((*str)[i] == '$')
-			replace(str, &((*str)[i]), env_lst);
+			replace(str, &((*str)[i]), env_lst, x);
 	}
 }
 
@@ -50,24 +51,24 @@ static void	skipquote(int *i, char *str)
 		(*i)--;
 }
 
-static void	replace(char **str, char *dollar, t_env *env_lst)
+static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x)
 {
 	size_t	i;
 	char	*rendu;
 	char	*sep;
 
 	i = 1;
-	if (!ft_isalnum(dollar[i]) && dollar[i] != '_')
+	if (!ft_isalnum(dollar[i]) && dollar[i] != '_' && dollar[i] != '?')
 		return ;
 	(*dollar) = '\0';
-	if (!ft_isdigit(dollar[i]))
+	if (!ft_isdigit(dollar[i]) && dollar[i] != '?')
 	{
 		while (dollar[i] && (ft_isalnum(dollar[i]) || dollar[i] == '_'))
 			i++;
 	}
 	else
 		i++;
-	sep = findenvvar(&dollar[1], i - 1, env_lst);
+	sep = findenvvar(&dollar[1], i - 1, env_lst, x);
 	if (!sep)
 		rendu = ft_strjoin((*str), &dollar[i], "");
 	else
@@ -79,8 +80,10 @@ static void	replace(char **str, char *dollar, t_env *env_lst)
 	(*str) = rendu;
 }
 
-static char	*findenvvar(char *dollar, size_t i, t_env *env_lst)
+static char	*findenvvar(char *dollar, size_t i, t_env *env_lst, t_exec *x)
 {
+	if (ft_strncmp("?", dollar,1) == 0)
+		return (ft_itoa(x->status));
 	while (env_lst)
 	{
 		if (ft_strlen(env_lst->key) == i && ft_strncmp(env_lst->key, dollar,

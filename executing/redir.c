@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:55:48 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 18:35:13 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:01:03 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*handle_redir_name(t_exec *x, t_redir *r)
 	tmp = ft_strdup(r->filename);
 	if (!tmp)
 		return (NULL);
-	new = cmdtoav(&r->filename, x->lst);
+	new = cmdtoav(&r->filename, x->lst, x);
 	if (!new)
 		return (free(tmp), NULL);
 	if (av_len(new) != 1)
