@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/23 10:35:57 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 09:56:53 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static int	is_flag(const char *s)
 	if (*s != '-')
 		return (0);
 	s++;
+	if (*s != 'n')
+		return (0);
 	while (*s && *s != ' ')
 	{
 		if (*s != 'n')
