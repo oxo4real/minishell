@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replaceenvvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/23 10:06:06 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:46:26 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*findenvvar(char *dollar, size_t i, t_env *env_lst)
 	while (env_lst)
 	{
 		if (ft_strlen(env_lst->key) == i && ft_strncmp(env_lst->key, dollar,
-				i) == 0)
+				i) == 0 && env_lst->value)
 			return (ft_strdup(env_lst->value));
 		env_lst = env_lst->next;
 	}
