@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   set_shlvl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:31:48 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/24 21:30:48 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:03:44 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "executing.h"
+#include "parsing.h"
+#include "utils.h"
 
 static int	isvalid(t_env *shlvl);
 static int	set_av1(char **av, t_env *shlvl);
-static void	the_one_case(int shelvl_value, char **av);
+static void	the_one_case(t_env *shelvl, char **av);
 
 void	set_shlvl(t_env **env_lst)
 {
@@ -37,9 +39,9 @@ static int	set_av1(char **av, t_env *shlvl)
 	int		shelvl_value;
 	char	*tmp;
 
-	if (!isvalid(shlvl) || ft_atoi(shlvl->value) > 999)
-		the_one_case(ft_atoi(shlvl->value), av);
-	else
+	if (!shlvl || !isvalid(shlvl) || ft_atoi(shlvl->value) > 999)
+		the_one_case(shlvl, av);
+	else if (shlvl)
 	{
 		shelvl_value = ft_atoi(shlvl->value);
 		if (shelvl_value == 999)
@@ -82,13 +84,13 @@ static int	isvalid(t_env *shlvl)
 	return (1);
 }
 
-static void	the_one_case(int shelvl_value, char **av)
+static void	the_one_case(t_env *shelvl, char **av)
 {
 	av[1] = ft_strdup("SHLVL=1");
-	if (shelvl_value > 999)
+	if (shelvl && ft_atoi(shelvl->value) > 999)
 	{
 		ft_putstr_fd("minishell: warning: shell level (", STDERR_FILENO);
-		ft_putnbr_fd(shelvl_value + 1, STDERR_FILENO);
+		ft_putnbr_fd(ft_atoi(shelvl->value) + 1, STDERR_FILENO);
 		ft_putstr_fd(") too high, resetting to 1\n", STDERR_FILENO);
 	}
 }
