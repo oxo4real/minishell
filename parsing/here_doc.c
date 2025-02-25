@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:10:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/23 14:57:55 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:57:54 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 
-int	here_doc(t_env *env_lst, char *deli)
+int	here_doc(t_env *env_lst, char *deli, t_exec *x)
 {
 	char	*line;
 	char	*buff;
@@ -28,7 +28,7 @@ int	here_doc(t_env *env_lst, char *deli)
 		line = readline("> ");
 		if (!line || ft_strcmp(line, deli) == 0)
 			break ;
-		replaceenvar(env_lst, &line);
+		replaceenvar(env_lst, &line, x);
 		buff = ft_strjoin(line, "\n", "");
 		if (!buff)
 			return (close(fd[0]), close(fd[1]), free(line), 1);
@@ -40,7 +40,7 @@ int	here_doc(t_env *env_lst, char *deli)
 	return (close(fd[1]), fd[0]);
 }
 
-static bool	do_here_doc_helper(t_redir *redir, t_env *env_lst)
+static bool	do_here_doc_helper(t_redir *redir, t_env *env_lst, t_exec *x)
 {
 	char	*tmp;
 
@@ -55,7 +55,7 @@ static bool	do_here_doc_helper(t_redir *redir, t_env *env_lst)
 				return (1);
 			free(redir->filename);
 			redir->filename = tmp;
-			redir->fd = here_doc(env_lst, tmp);
+			redir->fd = here_doc(env_lst, tmp, x);
 			if (redir->fd < 0)
 				return (1);
 		}
@@ -64,7 +64,7 @@ static bool	do_here_doc_helper(t_redir *redir, t_env *env_lst)
 	return (0);
 }
 
-bool	do_here_doc(t_node *head, t_env *env_lst)
+bool	do_here_doc(t_node *head, t_env *env_lst, t_exec *x)
 {
 	t_node	*stack;
 	t_node	*curr;
@@ -77,7 +77,7 @@ bool	do_here_doc(t_node *head, t_env *env_lst)
 	while (stack)
 	{
 		curr = pop(&stack);
-		if (do_here_doc_helper(curr->redir, env_lst))
+		if (do_here_doc_helper(curr->redir, env_lst, x))
 			return (1);
 		if (curr->r_child)
 			nodeadd_front(&stack, curr->r_child);

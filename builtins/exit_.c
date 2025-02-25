@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:19:06 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 19:46:46 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:47:58 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	count_args(char **av);
 static int	is_valid(char *s);
 
-void	exit_(char **av, bool print)
+void	exit_(char **av, bool print, t_exec *x)
 {
 	if (!av)
 		return ;
@@ -29,7 +29,10 @@ void	exit_(char **av, bool print)
 		exit(255);
 	}
 	else if (count_args(av) > 2)
+	{
+		x->status = 1;
 		return (print_error2("minishell", "exit", NULL, "too many arguments"));
+	}
 	exit(ft_atoi(av[1]));
 }
 

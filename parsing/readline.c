@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 21:50:53 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 18:16:08 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:42:07 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init(int fds[2], char *env[], t_exec *x)
 	x->lst = envtoenvlst(env);
 	x->status = 0;
 	rl_catch_signals = 0;
-	init_env(&x->lst);
+	init_env(&x->lst, x);
 }
 
 void	reset_in_out(t_exec *x)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_shlvl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:31:48 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 18:35:50 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:45:18 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	isvalid(t_env *shlvl);
 static int	set_av1(char **av, t_env *shlvl);
 static void	the_one_case(t_env *shelvl, char **av);
 
-void	set_shlvl(t_env **env_lst)
+void	set_shlvl(t_env **env_lst, t_exec *x)
 {
 	t_env	*shlvl;
 	char	*av[3];
@@ -27,7 +27,7 @@ void	set_shlvl(t_env **env_lst)
 	if (!set_av1(av, shlvl))
 		return ;
 	av[2] = NULL;
-	_export(av, env_lst);
+	_export(av, env_lst, x);
 	free(av[1]);
 }
 

@@ -3,24 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:10:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 19:56:33 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:44:33 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "executing.h"
 
-void	cd(char **av, t_env **env_lst)
+void	cd(char **av, t_env **env_lst, t_exec *x)
 {
 	if (!av || !env_lst)
 		return ;
 	else if (!av[1] && !gohome(env_lst))
+	{
+		x->status = 1;
 		return ;
+	}
 	else if (av[1] && chdir(av[1]) != 0)
+	{
+		x->status = 1;
 		return (print_error("minishell", "cd", av[1]));
-	set_env(env_lst);
+	}
+	x->status = 0;
+	set_env(env_lst, x);
 }
 
 int	gohome(t_env **env_lst)
@@ -37,7 +45,7 @@ int	gohome(t_env **env_lst)
 	return (1);
 }
 
-void	set_env(t_env **env_lst)
+void	set_env(t_env **env_lst, t_exec *x)
 {
 	t_env	*pwd;
 	char	*newpwd;
@@ -51,13 +59,13 @@ void	set_env(t_env **env_lst)
 		av[1] = ft_strdup("OLDPWD");
 	else
 		av[1] = ft_strjoin("OLDPWD", pwd->value, "=");
-	_export(av, env_lst);
+	_export(av, env_lst, x);
 	free(av[1]);
 	newpwd = getcwd(NULL, 0);
 	if (!newpwd)
 		av[1] = ft_strdup("PWD");
 	else
 		av[1] = ft_strjoin("PWD", newpwd, "=");
-	_export(av, env_lst);
+	_export(av, env_lst, x);
 	return (free(newpwd), free(av[1]));
 }

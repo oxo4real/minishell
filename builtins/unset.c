@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:04:21 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 19:57:52 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:30:48 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "executing.h"
 
 static void	freenode(t_env **node);
-static bool	valid_identifier(char *s);
+static bool	valid_identifier(char *s, t_exec *x);
 
-void	unset(char **av, t_env **env_lst)
+void	unset(char **av, t_env **env_lst, t_exec *x)
 {
 	t_env	*var;
 	t_env	*head;
 	int		i;
 
+	x->status = 0;
 	if (!env_lst || !av)
 		return ;
 	i = 0;
@@ -29,7 +31,7 @@ void	unset(char **av, t_env **env_lst)
 		var = (*env_lst);
 		while (var && ft_strcmp(var->key, av[i]) != 0)
 			var = var->next;
-		if (var && valid_identifier(av[i]))
+		if (var && valid_identifier(av[i], x))
 		{
 			head = (*env_lst);
 			while (head != var && head->next != var)
@@ -53,19 +55,25 @@ static void	freenode(t_env **node)
 	(*node) = NULL;
 }
 
-static bool	valid_identifier(char *s)
+static bool	valid_identifier(char *s, t_exec *x)
 {
 	char	*str;
 
 	str = s;
 	if (!s || ft_isdigit(*s))
+	{
+		x->status = 1;
 		return (print_error3("minishell", "export", str,
 				"not a valid indentifier"), false);
+	}
 	while ((*s))
 	{
 		if (!ft_isalnum(*s) || (*s) == '_')
+		{
+			x->status = 1;
 			return (print_error3("minishell", "export", str,
 					"not a valid indentifier"), false);
+		}
 		s++;
 	}
 	return (true);

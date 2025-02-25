@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 20:52:00 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 17:39:37 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:45:33 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char	*get_path(char *cmd, t_exec *x);
 void	expand_cmds(t_node *head, t_exec *x);
 bool	builtins(t_node *head, t_exec *x);
 bool	handle_redir(t_node *head, t_exec *x);
-void	set_shlvl(t_env **env_lst);
-void	init_env(t_env **env_lst);
+void	set_shlvl(t_env **env_lst, t_exec *x);
+void	init_env(t_env **env_lst, t_exec *x);
 void	interrupt(int sig);
 void	quit(int sig);
 void	reset_in_out(t_exec *x);

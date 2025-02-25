@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:02:49 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 18:42:13 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:00:53 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	exec_cmd(t_node *head, t_exec *x)
 		return ;
 	if (!head->cmd)
 		return ;
-	head->args = cmdtoav(&head->cmd, x->lst);
+	head->args = cmdtoav(&head->cmd, x->lst, x);
 	if (!head->args)
 		return ;
 	if (head->fd[WR_END] != -42)

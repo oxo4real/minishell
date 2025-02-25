@@ -6,24 +6,25 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 09:56:53 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 12:53:05 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "executing.h"
 
 static int	is_flag(const char *s);
 
-void	echo(char **av)
+void	echo(char **av, t_exec *x)
 {
 	int	newline;
 	int	i;
 
-	if (!av)
-		return ;
 	if (write(1, NULL, 0) < 0)
-		return (print_error("minishell", "echo", "write error"),
-			exit(EXIT_FAILURE));
+	{
+		x->status = 1;
+		return (print_error("minishell", "echo", "write error"));
+	}
 	newline = 1;
 	i = 1;
 	while (av[i] && is_flag(av[i]))
@@ -40,7 +41,7 @@ void	echo(char **av)
 	}
 	if (newline)
 		printf("\n");
-	// exit(EXIT_SUCCESS);
+	x->status = 0;
 }
 
 static int	is_flag(const char *s)

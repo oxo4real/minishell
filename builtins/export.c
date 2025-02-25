@@ -3,32 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 13:22:37 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/22 19:56:20 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:06:32 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "executing.h"
 
 static void	replace(t_env *var, char ***splited, char *has_value);
 static void	append(t_env *var, char ***splited);
 static void	addtolst(t_env **env_lst, char ***splited, char *has_value);
-static bool	valid_identifier(char *s);
+static bool	valid_identifier(char *s, t_exec *x);
 
-void	_export(char **av, t_env **env_lst)
+void	_export(char **av, t_env **env_lst, t_exec *x)
 {
 	t_env	*var;
 	char	**splited;
 	int		i;
 
+	x->status = 0;
 	if (!av[1])
 		return (pexport(*env_lst));
 	i = 0;
 	while (av[++i])
 	{
-		if (!valid_identifier(av[i]))
+		if (!valid_identifier(av[i], x))
 			continue ;
 		splited = split_var(av[i]);
 		if (!splited)
@@ -71,24 +73,32 @@ static void	addtolst(t_env **env_lst, char ***splited, char *has_value)
 	(*splited) = NULL;
 }
 
-static bool	valid_identifier(char *s)
+static bool	valid_identifier(char *s, t_exec *x)
 {
 	char	*str;
 
 	str = s;
 	if (!s || (*s) == '+' || (*s) == '=' || ft_isdigit(*s))
+	{
 		return (print_error3("minishell", "export", str,
 				"not a valid indentifier"), false);
+		x->status = 1;
+	}
 	while ((*s) && (*s) != '+' && (*s) != '=')
 	{
-		if (!ft_isalnum(*s) && (*s) != '_')
+		if ((!ft_isalnum(*s) && (*s) != '_') || !(++s))
+		{
 			return (print_error3("minishell", "export", str,
-					"not a valid indentifier"), false);
-		s++;
+				"not a valid indentifier"), false);
+			x->status = 1;
+		}
 	}
 	if ((*s) == '+' && (*(s + 1)) != '=')
+	{
 		return (print_error3("minishell", "export", str,
-				"not a valid indentifier"), false);
+			"not a valid indentifier"), false);
+			x->status = 1;
+	}
 	return (true);
 }
 
