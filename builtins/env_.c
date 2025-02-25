@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:52:52 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 12:55:05 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/25 20:58:55 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "executing.h"
 
 void	env_(t_env *env_lst, t_exec *x)
 {
