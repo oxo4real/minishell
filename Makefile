@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -g# -fsanitize=address,undefined
+CFLAGS = -Werror -Wextra -Wall# -g -fsanitize=address,undefined
 SRCS =
 
 #UTILS
