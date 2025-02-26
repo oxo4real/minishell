@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:55:48 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 20:51:16 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 08:33:38 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*handle_redir_name(t_exec *x, t_redir *r)
 	new = cmdtoav(&r->filename, x->lst, x);
 	if (!new)
 		return (free(tmp), NULL);
+	(free(r->filename), r->filename = NULL);
 	if (av_len(new) != 1)
 	{
 		print_error2(SH_NAME, tmp, "ambiguous redirect", 0);
@@ -86,7 +87,7 @@ char	*handle_redir_name(t_exec *x, t_redir *r)
 	}
 	free(tmp);
 	tmp = ft_strdup(new[0]);
-	(freestrarr(&new), free(r->filename), r->filename = NULL);
+	(freestrarr(&new));
 	if (!tmp)
 		return (NULL);
 	return (tmp);
