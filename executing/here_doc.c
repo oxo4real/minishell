@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:10:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 13:54:50 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:06:43 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	here_doc(char *deli, t_exec *x)
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) == 1)
 		return (close(fd[1]), close(fd[0]), x->status = 1, -1);
-	return (close(fd[1]), g_sig = 0, fd[0]);
+	return (close(fd[1]), fd[0]);
 }
 
 static bool	do_here_doc_helper(t_redir *redir, t_exec *x)
