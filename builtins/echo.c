@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:58:42 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 20:40:56 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:51:56 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	echo(char **av, t_exec *x)
 		i++;
 	}
 	if (newline)
-		printf("\n");
+		ft_putchar_fd('\n', 1);
 	x->status = 0;
 }
 

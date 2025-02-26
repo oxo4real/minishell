@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:52:28 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:44:09 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	free_redir(t_redir *redir)
 		return ;
 	if (redir->filename)
 		(free(redir->filename), redir->filename = NULL);
+	close(redir->fd);
 	free(redir);
 }
 

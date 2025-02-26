@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:55:48 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 08:33:38 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:44:21 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*handle_redir_name(t_exec *x, t_redir *r)
 	if (!new)
 		return (free(tmp), NULL);
 	(free(r->filename), r->filename = NULL);
-	if (av_len(new) != 1)
+	if (av_len(new) != 1 && !new[0])
 	{
 		print_error2(SH_NAME, tmp, "ambiguous redirect", 0);
 		x->status = 1;

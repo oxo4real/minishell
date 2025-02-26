@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:50:45 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 20:33:39 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:41:37 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void	interrupt(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+}
+
+void	interrupt_herdoc(int sig)
+{
+	(void)sig;
+	exit(g_sig);
 }
 
 void	quit(int sig)

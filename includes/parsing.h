@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 12:03:11 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 12:51:38 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ char				*getsortedwildcard(char *wildcard);
 void				replacewildcards(char **str);
 // ####################### - WILDCARD - ##########################
 
-bool				do_here_doc(t_node *head, t_env *env_lst, t_exec *x);
 t_node				*pop(t_node **head);
 
 #endif

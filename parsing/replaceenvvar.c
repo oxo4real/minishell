@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replaceenvvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/26 12:03:33 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:00:43 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x)
 	char	*sep;
 
 	i = 1;
-	if (!ft_isalnum(dollar[i]) && dollar[i] != '_' && dollar[i] != '?' && dollar[i] != '@')
+	if (!ft_isalnum(dollar[i]) && dollar[i] != '_' && dollar[i] != '?'
+		&& dollar[i] != '@')
 		return ;
 	(*dollar) = '\0';
 	if (!ft_isdigit(dollar[i]) && dollar[i] != '?' && dollar[i] != '@')
@@ -76,8 +77,7 @@ static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x)
 	free(sep);
 	if (!rendu)
 		return ;
-	free(*str);
-	(*str) = rendu;
+	(free(*str), (*str) = rendu);
 }
 
 static char	*findenvvar(char *dollar, size_t i, t_env *env_lst, t_exec *x)

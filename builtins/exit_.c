@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 16:19:06 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 19:47:58 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 11:22:56 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exit_(char **av, bool print, t_exec *x)
 	if (print)
 		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (count_args(av) == 1)
-		exit(0);
+		exit(x->status);
 	else if (!is_valid(av[1]))
 	{
 		print_error2("minishell", "exit", av[1], "numeric argument required");

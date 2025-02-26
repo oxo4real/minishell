@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:08:49 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 18:31:36 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:42:44 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ char	*get_path(char *cmd, t_exec *x)
 	char	*new;
 
 	i = 0;
-	if (is_dir(cmd))
-		return (x->status = 126, cmd);
 	if (!*cmd)
 		return (x->status = 127, cmd);
+	if (is_dir(cmd) || ft_strchr(cmd, '/'))
+		return (x->status = 126, cmd);
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
 	paths = fetch_paths(x->lst);
 	if (!paths)
-		return (x->status = 127, cmd);
+		return (x->status = 126, cmd);
 	while (paths[i])
 	{
 		new = ft_strjoin(paths[i], cmd, "/");

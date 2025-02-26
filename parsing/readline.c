@@ -3,30 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 21:50:53 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 19:42:07 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 13:13:06 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
-#include "parsing.h"
 
 int		g_sig = 0;
 
-void	ll(void)
-{
-	system("leaks -q minishell");
-}
-
 char	*get_line(void)
 {
+	char	*line;
 	int		fd;
 	char	*prompt;
-	char	*line;
 
-	prompt = "";
 	if (isatty(STDIN_FILENO))
 	{
 		prompt = BOLD_RED SH_NAME " > " RESET;
@@ -35,12 +28,14 @@ char	*get_line(void)
 			write(STDERR_FILENO, "\n", 1);
 			g_sig = 0;
 		}
+		fd = dup(1);
+		dup2(2, 1);
+		line = readline(prompt);
+		dup2(fd, 1);
+		close(fd);
 	}
-	fd = dup(1);
-	dup2(2, 1);
-	line = readline(prompt);
-	dup2(fd, 1);
-	close(fd);
+	else
+		line = get_next_line(0);
 	return (line);
 }
 
@@ -87,6 +82,6 @@ int	main(int ac, char *av[], char *env[])
 		add_history(line);
 		(executor(parser(line, &x), &x), reset_in_out(&x));
 	}
-	(envlstclear(&x.lst), ll());
+	envlstclear(&x.lst);
 	return (x.status);
 }
