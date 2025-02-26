@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/26 11:44:55 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 12:03:33 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	replaceenvar(t_env *env_lst, char **str, t_exec *x)
 		else if ((*str)[i] == '$')
 			replace(str, &((*str)[i]), env_lst, x);
 	}
+	rm_06(*str);
 }
 
 static void	skipquote(int *i, char *str)

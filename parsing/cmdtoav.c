@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 18:59:26 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/26 11:12:38 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 12:03:44 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	removemainqotes(char *str);
 static void	replace(char *str, int *j);
-static void	rm_06(char *str);
 
 char	**cmdtoav(char **cmd, t_env *env_lst, t_exec *x)
 {
@@ -22,7 +21,6 @@ char	**cmdtoav(char **cmd, t_env *env_lst, t_exec *x)
 	int		i;
 
 	replaceenvar(env_lst, cmd, x);
-	rm_06(*cmd);
 	sptobel(*cmd);
 	replacewildcards(cmd);
 	av = ft_split(*cmd, SEP);
@@ -34,7 +32,7 @@ char	**cmdtoav(char **cmd, t_env *env_lst, t_exec *x)
 	return (av);
 }
 
-static void	rm_06(char *str)
+void	rm_06(char *str)
 {
 	int	j;
 	int	i;

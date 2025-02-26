@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 19:58:13 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 12:03:11 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int					envlstlen(t_env *env_lst);
 // sus
 void				replaceenvar(t_env *env_lst, char **str, t_exec *x);
 void				sptobel(char *str);
+void				rm_06(char *str);
 // ######################### - ENV - #############################
 
 // ####################### - WILDCARD - ##########################
