@@ -31,7 +31,7 @@ SRCS += builtins/cd.c builtins/echo.c builtins/env_.c builtins/exit_.c builtins/
 #EXECUTING
 SRCS += executing/cmd.c executing/exec_.c executing/executor.c executing/get_path.c executing/redir.c \
 		executing/builtins.c executing/set_shlvl.c executing/init_env.c executing/signals.c executing/exec_pipe.c \
-		executing/here_doc.c 
+		executing/here_doc.c executing/expander.c
 #EXECUTING
 
 

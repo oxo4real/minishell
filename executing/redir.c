@@ -6,19 +6,24 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:55:48 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 14:44:21 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:38:32 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
 
-static bool	handle_redir_helper_more(t_token tk, t_node *head, t_redir *r)
+static bool	handle_redir_helper_more(t_token tk, t_node *head, t_redir *r,
+		t_exec *x)
 {
 	if (tk == IN || tk == HEREDOC)
 	{
 		close(head->fd[RD_END]);
 		if (tk == HEREDOC)
+		{
+			if (expander(x, r))
+				return (1);
 			head->fd[RD_END] = r->fd;
+		}
 		else
 			head->fd[RD_END] = open(r->filename, O_RDONLY);
 		if (head->fd[RD_END] < 0)
@@ -30,7 +35,7 @@ static bool	handle_redir_helper_more(t_token tk, t_node *head, t_redir *r)
 	return (0);
 }
 
-static bool	handle_redir_helper(t_token tk, t_node *head, t_redir *r)
+static bool	handle_redir_helper(t_token tk, t_node *head, t_redir *r, t_exec *x)
 {
 	if (tk == OUT || tk == APPEND)
 	{
@@ -45,7 +50,7 @@ static bool	handle_redir_helper(t_token tk, t_node *head, t_redir *r)
 			return (1);
 		}
 	}
-	if (handle_redir_helper_more(tk, head, r))
+	if (handle_redir_helper_more(tk, head, r, x))
 		return (1);
 	return (0);
 }
@@ -103,10 +108,13 @@ bool	handle_redir(t_node *head, t_exec *x)
 	r = head->redir;
 	while (r)
 	{
-		r->filename = handle_redir_name(x, r);
-		if (!r->filename)
-			return (1);
-		if (handle_redir_helper(r->type, head, r))
+		if (r->type != HEREDOC)
+		{
+			r->filename = handle_redir_name(x, r);
+			if (!r->filename)
+				return (1);
+		}
+		if (handle_redir_helper(r->type, head, r, x))
 			return (1);
 		r = r->next;
 	}

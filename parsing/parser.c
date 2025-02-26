@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:15:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/25 17:58:23 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:32:24 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_node	*parser(char *line, t_exec *x)
 	if (!s)
 		return (NULL);
 	if (check_begining(s))
-		return (free(s), x->status = 258, NULL);
+		return (free(s), NULL);
 	if (tokenizer(s, x))
 		return (free(s), clear_nodes(&x->head), NULL);
 	free(s);

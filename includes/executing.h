@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 20:52:00 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 12:51:42 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:38:59 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	quit(int sig);
 void	reset_in_out(t_exec *x);
 bool	if_fork(int pid);
 bool	do_here_doc(t_node *head, t_exec *x);
+bool	expander(t_exec *x, t_redir *r);
 
 #endif

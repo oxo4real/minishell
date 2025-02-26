@@ -6,12 +6,11 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:10:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 19:05:19 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:40:33 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
-#include "parsing.h"
 #include <termios.h>
 
 void	reset_terminal_mode(void)
@@ -28,6 +27,7 @@ static void	here_doc_helper(int fd[2], char *deli, t_exec *x)
 	char	*line;
 	char	*buff;
 
+	(void)x;
 	signal(SIGINT, interrupt_herdoc);
 	rl_catch_signals = 0;
 	buff = NULL;
@@ -39,7 +39,6 @@ static void	here_doc_helper(int fd[2], char *deli, t_exec *x)
 		line = readline("> ");
 		if (!line || ft_strcmp(line, deli) == 0)
 			break ;
-		replaceenvar(x->lst, &line, x);
 		buff = ft_strjoin(line, "\n", "");
 		if (!buff)
 			(close(fd[0]), close(fd[1]), free(line), exit(1));
