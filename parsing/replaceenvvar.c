@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replaceenvvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/25 20:40:51 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:07:27 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,23 @@ static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x)
 
 static char	*findenvvar(char *dollar, size_t i, t_env *env_lst, t_exec *x)
 {
+	char	*rendu;
+	char	*tmp;
+
 	if (ft_strncmp("?", dollar, 1) == 0)
 		return (ft_itoa(x->status));
 	while (env_lst)
 	{
 		if (ft_strlen(env_lst->key) == i && ft_strncmp(env_lst->key, dollar,
 				i) == 0 && env_lst->value)
-			return (ft_strdup(env_lst->value));
+		{
+			tmp = ft_strdup(env_lst->value);
+			if (!tmp)
+				return (NULL);
+			rendu = ft_strjoin("\x06", "\x06", tmp);
+			free(tmp);
+			return (rendu);
+		}
 		env_lst = env_lst->next;
 	}
 	return (NULL);
