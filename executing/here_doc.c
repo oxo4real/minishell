@@ -6,11 +6,21 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:10:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 18:06:43 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:20:06 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing.h"
+#include <termios.h>
+
+void	reset_terminal_mode(void)
+{
+	struct termios	term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag |= (ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+}
 
 static void	here_doc_helper(int fd[2], char *deli, t_exec *x)
 {
@@ -18,8 +28,8 @@ static void	here_doc_helper(int fd[2], char *deli, t_exec *x)
 	char	*buff;
 
 	signal(SIGINT, interrupt_herdoc);
+	rl_catch_signals = 0;
 	buff = NULL;
-	rl_catch_signals = 1;
 	if (write(fd[1], NULL, 0) < 0)
 		(print_error("minishell", "here_doc", "write error"), exit(1));
 	while (1337)
@@ -52,6 +62,8 @@ int	here_doc(char *deli, t_exec *x)
 	if (pid == 0)
 		here_doc_helper(fd, deli, x);
 	waitpid(pid, &status, 0);
+	rl_catch_signals = 1;
+	reset_terminal_mode();
 	if (WEXITSTATUS(status) == 1)
 		return (close(fd[1]), close(fd[0]), x->status = 1, -1);
 	return (close(fd[1]), fd[0]);
