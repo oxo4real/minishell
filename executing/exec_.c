@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:02:49 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 11:28:21 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:13:27 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	exec_child(t_node *head, t_exec *x)
 {
 	execve(head->args[0], head->args, x->env);
-	if (x->status == 126 && errno == 2)
+	if (x->status == 126 && errno == ENOENT)
 		(print_error(SH_NAME, 0, head->args[0]), x->status = 127);
 	else if (x->status == 126)
 		print_error2(SH_NAME, head->args[0], "is a directory", 0);
@@ -55,7 +55,7 @@ void	exec_cmd(t_node *head, t_exec *x)
 	if (!head->cmd)
 		return ;
 	head->args = cmdtoav(&head->cmd, x->lst, x);
-	if (!head->args)
+	if (!head->args || !head->args[0])
 		return ;
 	if (head->fd[WR_END] != -42)
 	{
