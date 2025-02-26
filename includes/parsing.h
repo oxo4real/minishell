@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 12:51:38 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:51:28 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ t_token				next_token(char *s);
 bool				is_space(char c);
 void				toggle_q(char c, char *q);
 int					tk_prec(t_token type);
-bool				check_begining(char *s);
+bool				check_begining(char *s, t_exec *x);
 char				*strdup_to(const char *str, size_t size);
 // ########################## - TOKEN - ##########################
 

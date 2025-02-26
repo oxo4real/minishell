@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 12:06:52 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/22 20:18:26 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:51:45 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	tk_prec(t_token type)
 	return (0);
 }
 
-bool	check_begining(char *s)
+bool	check_begining(char *s, t_exec *x)
 {
 	t_token	tk;
 
@@ -51,6 +51,7 @@ bool	check_begining(char *s)
 	if (tk == AND || tk == OR || tk == RPR || tk == PIPE)
 	{
 		print_unexpected(match_tk_str(tk));
+		x->status = 258;
 		return (1);
 	}
 	return (0);
