@@ -6,7 +6,7 @@
 /*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/26 11:07:27 by aaghzal          ###   ########.fr       */
+/*   Updated: 2025/02/26 11:44:55 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x)
 	char	*sep;
 
 	i = 1;
-	if (!ft_isalnum(dollar[i]) && dollar[i] != '_' && dollar[i] != '?')
+	if (!ft_isalnum(dollar[i]) && dollar[i] != '_' && dollar[i] != '?' && dollar[i] != '@')
 		return ;
 	(*dollar) = '\0';
-	if (!ft_isdigit(dollar[i]) && dollar[i] != '?')
+	if (!ft_isdigit(dollar[i]) && dollar[i] != '?' && dollar[i] != '@')
 	{
 		while (dollar[i] && (ft_isalnum(dollar[i]) || dollar[i] == '_'))
 			i++;
