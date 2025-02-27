@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:38:40 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 20:42:27 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:30:25 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	expander(t_exec *x, t_redir *r)
 		if (!line)
 			break ;
 		replaceenvar(x->lst, &line, x);
-		write(fds[WR_END], line, ft_strlen(line));
+		ft_putstr_fd(line, fds[WR_END]);
 	}
 	(close(fds[WR_END]), close(r->fd), r->fd = fds[RD_END]);
 	return (0);

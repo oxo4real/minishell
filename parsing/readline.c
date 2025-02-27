@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 21:50:53 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 19:36:59 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:40:22 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ char	*get_line(void)
 	if (isatty(STDIN_FILENO))
 	{
 		prompt = BOLD_RED SH_NAME " > " RESET;
-		if (g_sig == 130)
+		if (g_sig)
 		{
-			write(STDERR_FILENO, "\n", 1);
+			if (g_sig == 130)
+				write(STDERR_FILENO, "\n", 1);
 			g_sig = 0;
 		}
 		fd = dup(1);

@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:10:44 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/26 20:40:33 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:00:49 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	here_doc_helper(int fd[2], char *deli, t_exec *x)
 		buff = ft_strjoin(line, "\n", "");
 		if (!buff)
 			(close(fd[0]), close(fd[1]), free(line), exit(1));
-		write(fd[1], buff, ft_strlen(buff));
+		ft_putstr_fd(buff, fd[1]);
 		free(line);
 		free(buff);
 	}
@@ -58,14 +58,18 @@ int	here_doc(char *deli, t_exec *x)
 
 	if (pipe(fd) < 0)
 		return (print_error("minishell", "here_doc", "pipe error"), -1);
+	signal(SIGQUIT, SIG_IGN);
 	pid = fork();
+	if (if_fork(pid))
+		return (-1);
 	if (pid == 0)
 		here_doc_helper(fd, deli, x);
 	waitpid(pid, &status, 0);
 	reset_terminal_mode();
 	if (WEXITSTATUS(status) == 1)
 		return (close(fd[1]), close(fd[0]), x->status = 1, -1);
-	return (close(fd[1]), g_sig = 0, fd[0]);
+	signal(SIGQUIT, quit);
+	return (close(fd[1]), fd[0]);
 }
 
 static bool	do_here_doc_helper(t_redir *redir, t_exec *x)
