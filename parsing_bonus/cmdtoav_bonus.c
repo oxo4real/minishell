@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmdtoav.c                                          :+:      :+:    :+:   */
+/*   cmdtoav_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 18:59:26 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/27 11:43:13 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:11:17 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parsing_bonus.h"
 
 static void	removemainqotes(char *str);
 static void	replace(char *str, int *j);
@@ -22,6 +22,7 @@ char	**cmdtoav(char **cmd, t_env *env_lst, t_exec *x)
 
 	replaceenvar(env_lst, cmd, x);
 	sptobel(*cmd);
+	replacewildcards(cmd);
 	av = ft_split(*cmd, SEP);
 	if (!av)
 		return (NULL);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tk_match.c                                         :+:      :+:    :+:   */
+/*   tk_match_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:36:23 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/27 11:33:36 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:11:17 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parsing_bonus.h"
 
 t_token	match_tk(char *s)
 {
@@ -24,8 +24,16 @@ t_token	match_tk(char *s)
 		return (IN);
 	else if (*s == '>')
 		return (OUT);
+	else if (*s == '|' && *(s + 1) == '|')
+		return (OR);
+	else if (*s == '&' && *(s + 1) == '&')
+		return (AND);
 	else if (*s == '|')
 		return (PIPE);
+	else if (*s == '(')
+		return (LPR);
+	else if (*s == ')')
+		return (RPR);
 	return (STR);
 }
 
@@ -41,8 +49,16 @@ char	*match_tk_str(t_token type)
 		return ("<");
 	else if (type == OUT)
 		return (">");
+	else if (type == OR)
+		return ("||");
+	else if (type == AND)
+		return ("&&");
 	else if (type == PIPE)
 		return ("|");
+	else if (type == LPR)
+		return ("(");
+	else if (type == RPR)
+		return (")");
 	return ("STR");
 }
 
@@ -58,7 +74,15 @@ char	*match_tk_name(t_token type)
 		return ("IN");
 	else if (type == OUT)
 		return ("OUT");
+	else if (type == OR)
+		return ("OR");
+	else if (type == AND)
+		return ("AND");
 	else if (type == PIPE)
 		return ("PIPE");
+	else if (type == LPR)
+		return ("LPR");
+	else if (type == RPR)
+		return ("RPR");
 	return ("STR");
 }

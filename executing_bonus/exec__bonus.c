@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_.c                                            :+:      :+:    :+:   */
+/*   exec__bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:02:49 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/27 11:31:15 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:11:39 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executing.h"
+#include "executing_bonus.h"
 
 static void	exec_child(t_node *head, t_exec *x)
 {
@@ -93,6 +93,18 @@ void	exec_(t_node *head, t_exec *x)
 		return ;
 	if (head->type == STR)
 		exec_cmd(head, x);
+	if (head->type == OR)
+	{
+		exec_(head->l_child, x);
+		if (x->status != 0)
+			exec_(head->r_child, x);
+	}
+	if (head->type == AND)
+	{
+		exec_(head->l_child, x);
+		if (x->status == 0)
+			exec_(head->r_child, x);
+	}
 	if (head->type == PIPE)
 		exec_pipe(head, x);
 }

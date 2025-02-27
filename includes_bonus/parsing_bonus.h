@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/27 11:56:14 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:56:21 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
-# include "utils.h"
+#ifndef PARSING_BONUS_H
+# define PARSING_BONUS_H
+# include "utils_bonus.h"
 # include <dirent.h>
 # include <stdbool.h>
 # include <sys/wait.h>
@@ -166,6 +166,7 @@ char				*joinslist(t_slist *slist, char *sep);
 int					match_wildcard(char *s, char *p);
 t_slist				*insert_sorted(t_slist **head, char *str);
 char				*getsortedwildcard(char *wildcard);
+void				replacewildcards(char **str);
 // ####################### - WILDCARD - ##########################
 
 t_node				*pop(t_node **head);
