@@ -6,7 +6,7 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 20:52:00 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/27 11:57:12 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/03/02 09:29:04 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	exec_cmd(t_node *head, t_exec *x);
 void	exec_(t_node *head, t_exec *x);
 void	exec_pipe(t_node *head, t_exec *x);
 char	*get_path(char *cmd, t_exec *x);
-void	expand_cmds(t_node *head, t_exec *x);
 bool	builtins(t_node *head, t_exec *x);
 bool	handle_redir(t_node *head, t_exec *x);
 void	set_shlvl(t_env **env_lst, t_exec *x);
