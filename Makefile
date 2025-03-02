@@ -29,7 +29,7 @@ SRCS += builtins/cd.c builtins/echo.c builtins/env_.c builtins/exit_.c builtins/
 #BUILTINS
 
 #EXECUTING
-SRCS += executing/cmd.c executing/exec_.c executing/executor.c executing/get_path.c executing/redir.c \
+SRCS += executing/exec_.c executing/executor.c executing/get_path.c executing/redir.c \
 		executing/builtins.c executing/set_shlvl.c executing/init_env.c executing/signals.c executing/exec_pipe.c \
 		executing/here_doc.c executing/expander.c
 #EXECUTING
@@ -63,7 +63,7 @@ B_SRCS += builtins_bonus/cd_bonus.c builtins_bonus/echo_bonus.c builtins_bonus/e
 #BUILTINS
 
 #EXECUTING
-B_SRCS += executing_bonus/cmd_bonus.c executing_bonus/exec__bonus.c executing_bonus/executor_bonus.c executing_bonus/get_path_bonus.c executing_bonus/redir_bonus.c \
+B_SRCS += executing_bonus/exec__bonus.c executing_bonus/executor_bonus.c executing_bonus/get_path_bonus.c executing_bonus/redir_bonus.c \
 		executing_bonus/builtins_bonus.c executing_bonus/set_shlvl_bonus.c executing_bonus/init_env_bonus.c executing_bonus/signals_bonus.c executing_bonus/exec_pipe_bonus.c \
 		executing_bonus/here_doc_bonus.c executing_bonus/expander_bonus.c
 #EXECUTING
