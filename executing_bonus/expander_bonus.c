@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:38:40 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/27 12:30:05 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:17:38 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	expander(t_exec *x, t_redir *r)
 		line = get_next_line(r->fd);
 		if (!line)
 			break ;
-		replaceenvar(x->lst, &line, x);
+		replaceenvar(x->lst, &line, x, 0);
 		ft_putstr_fd(line, fds[WR_END]);
 		free(line);
 	}

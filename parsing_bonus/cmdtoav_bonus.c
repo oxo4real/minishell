@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdtoav_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 18:59:26 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/27 11:11:17 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:19:39 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**cmdtoav(char **cmd, t_env *env_lst, t_exec *x)
 	char	**av;
 	int		i;
 
-	replaceenvar(env_lst, cmd, x);
+	replaceenvar(env_lst, cmd, x, 1);
 	sptobel(*cmd);
 	replacewildcards(cmd);
 	av = ft_split(*cmd, SEP);

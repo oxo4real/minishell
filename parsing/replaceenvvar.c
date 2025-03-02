@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replaceenvvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 07:56:13 by aaghzal           #+#    #+#             */
-/*   Updated: 2025/02/26 13:00:43 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:18:02 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	skipquote(int *i, char *str);
 static void	replace(char **str, char *dollar, t_env *env_lst, t_exec *x);
 static char	*findenvvar(char *dollar, size_t i, t_env *env_lst, t_exec *x);
 
-void	replaceenvar(t_env *env_lst, char **str, t_exec *x)
+void	replaceenvar(t_env *env_lst, char **str, t_exec *x, bool skip_quotes)
 {
 	int	i;
 	int	in_dq;
@@ -27,7 +27,7 @@ void	replaceenvar(t_env *env_lst, char **str, t_exec *x)
 	in_dq = 0;
 	while (i-- > 0)
 	{
-		if ((*str)[i] == '\'' && !in_dq)
+		if (skip_quotes && (*str)[i] == '\'' && !in_dq)
 			skipquote(&i, (*str));
 		else if ((*str)[i] == '"')
 		{

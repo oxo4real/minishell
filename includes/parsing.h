@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaghzal <aaghzal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 21:12:42 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/27 11:56:14 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:18:22 by aaghzal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void				freestrarr(char ***arr);
 char				**split_var(char *var);
 int					expandenvlst(t_env **env_lst, char **splited);
 int					envlstlen(t_env *env_lst);
-void				replaceenvar(t_env *env_lst, char **str, t_exec *x);
+void				replaceenvar(t_env *env_lst, char **str, t_exec *x, bool skip_quotes);
 void				sptobel(char *str);
 void				rm_06(char *str);
 // ######################### - ENV - #############################
