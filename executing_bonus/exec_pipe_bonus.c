@@ -6,11 +6,21 @@
 /*   By: mhayyoun <mhayyoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:38:21 by mhayyoun          #+#    #+#             */
-/*   Updated: 2025/02/27 11:11:39 by mhayyoun         ###   ########.fr       */
+/*   Updated: 2025/03/02 13:41:42 by mhayyoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executing_bonus.h"
+
+bool	if_fork(int pid)
+{
+	if (pid < 0)
+	{
+		print_error2(SH_NAME, "fork", "Resource temporarily unavailable", 0);
+		return (1);
+	}
+	return (0);
+}
 
 int	exec_lpipe(t_node *head, t_exec *x, int fds[2])
 {
